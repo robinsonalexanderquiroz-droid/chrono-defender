@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 
 import { audioManager } from '../systems/AudioManager';
+import { achievementManager } from '../systems/AchievementManager';
 import { difficultyManager } from '../systems/DifficultyManager';
 import { saveManager } from '../systems/SaveManager';
 import { scoreManager } from '../systems/ScoreManager';
@@ -544,6 +545,11 @@ export class PrototypeScene extends Phaser.Scene {
     waveManager.startNextWave();
     difficultyManager.setWave(waveManager.getCurrentWave());
 
+    // Achievement: game start
+    achievementManager.check('gameStart', {
+      totalGamesPlayed: saveManager.getStats().gamesPlayed,
+    });
+
     // Initialize UI systems
     this.weaponSwitcher = new WeaponSwitcher(this);
     this.achievementRenderer = new AchievementNotificationRenderer(this);
@@ -827,6 +833,11 @@ export class PrototypeScene extends Phaser.Scene {
       this.spawnExplosion(e.x, e.y, isHeavy ? 1.5 : 1.0);
       audioManager.playEnemyDestroyed();
       e.destroy();
+
+      // Achievement: enemy kill + combo + score
+      achievementManager.check('enemyKill', {});
+      achievementManager.check('combo', { combo: scoreManager.getCombo() });
+      achievementManager.check('score', { score: scoreManager.getScore() });
     } else {
       e.setData('hp', hp);
       e.setTint(0xffffff);
@@ -1079,6 +1090,9 @@ export class PrototypeScene extends Phaser.Scene {
     scoreManager.addBonus(2000, 'BOSS DEFEATED', 480, 270);
     this.score = scoreManager.getScore();
     saveManager.incrementBossesDefeated();
+    achievementManager.check('bossDefeat', {
+      lostLifeDuringBoss: this.lives < 3,
+    });
     audioManager.playBossDefeated();
     if (this.boss) {
       this.spawnExplosion(this.boss.x, this.boss.y, 3.0);
@@ -1126,7 +1140,6 @@ export class PrototypeScene extends Phaser.Scene {
 
     // Persist stats
     saveManager.updateHighScore(this.score);
-    saveManager.incrementGamesPlayed();
 
     if (victory) {
       this.messageText

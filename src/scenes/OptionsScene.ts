@@ -10,6 +10,7 @@
 import Phaser from 'phaser';
 
 import { audioManager } from '../systems/AudioManager';
+import { gamepadManager, BUTTON } from '../systems/GamepadManager';
 import { saveManager } from '../systems/SaveManager';
 import { settingsManager } from '../systems/SettingsManager';
 
@@ -193,6 +194,17 @@ export class OptionsScene extends Phaser.Scene {
   private keyY: Phaser.Input.Keyboard.Key | null = null;
   private keyN: Phaser.Input.Keyboard.Key | null = null;
 
+  // ─── Gamepad State ─────────────────────────────────────────────────
+
+  /** Repeat delay for held gamepad input (ms) */
+  private readonly GP_REPEAT_DELAY = 400;
+  /** Repeat interval after initial delay (ms) */
+  private readonly GP_REPEAT_INTERVAL = 150;
+  /** Timers for held directions */
+  private gpHeldTimer: Record<string, number> = {};
+  /** Whether initial delay has passed for held direction */
+  private gpRepeating: Record<string, boolean> = {};
+
   constructor() {
     super({ key: 'OptionsScene' });
   }
@@ -207,9 +219,15 @@ export class OptionsScene extends Phaser.Scene {
     this.scrollY = 0;
     this.modalVisible = false;
     this.pendingAction = null;
+    this.gpHeldTimer = {};
+    this.gpRepeating = {};
 
     this.registerKeys();
     this.renderAll();
+  }
+
+  override update(_time: number, delta: number): void {
+    this.pollGamepad(delta);
   }
 
   shutdown(): void {
@@ -281,6 +299,85 @@ export class OptionsScene extends Phaser.Scene {
     this.keyEsc = null;
     this.keyY = null;
     this.keyN = null;
+  }
+
+  // ─── Gamepad Polling ────────────────────────────────────────────────
+
+  private pollGamepad(delta: number): void {
+    gamepadManager.update();
+
+    if (!gamepadManager.isConnected()) return;
+
+    // Edge-detected buttons
+    if (gamepadManager.isButtonJustPressed(BUTTON.A)) {
+      if (this.modalVisible) {
+        this.onY();
+      } else {
+        this.onEnter();
+      }
+    }
+
+    if (gamepadManager.isButtonJustPressed(BUTTON.B)) {
+      if (this.modalVisible) {
+        this.onN();
+      } else {
+        this.onEsc();
+      }
+    }
+
+    if (gamepadManager.isButtonJustPressed(BUTTON.START)) {
+      this.onEsc();
+    }
+
+    // Directional input with repeat delay
+    const axes = gamepadManager.getAxes();
+    const dpadUp =
+      gamepadManager.isButtonPressed(BUTTON.DPAD_UP) || axes.y < -0.5;
+    const dpadDown =
+      gamepadManager.isButtonPressed(BUTTON.DPAD_DOWN) || axes.y > 0.5;
+    const dpadLeft =
+      gamepadManager.isButtonPressed(BUTTON.DPAD_LEFT) || axes.x < -0.5;
+    const dpadRight =
+      gamepadManager.isButtonPressed(BUTTON.DPAD_RIGHT) || axes.x > 0.5;
+
+    this.handleHeldDirection('up', dpadUp, delta, () => this.onUp());
+    this.handleHeldDirection('down', dpadDown, delta, () => this.onDown());
+    this.handleHeldDirection('left', dpadLeft, delta, () => this.onLeft());
+    this.handleHeldDirection('right', dpadRight, delta, () => this.onRight());
+  }
+
+  private handleHeldDirection(
+    dir: string,
+    pressed: boolean,
+    delta: number,
+    action: () => void,
+  ): void {
+    if (!pressed) {
+      this.gpHeldTimer[dir] = 0;
+      this.gpRepeating[dir] = false;
+      return;
+    }
+
+    const timer = (this.gpHeldTimer[dir] ?? 0) + delta;
+    this.gpHeldTimer[dir] = timer;
+
+    if (!this.gpRepeating[dir]) {
+      // First press or waiting for initial delay
+      if (timer >= this.GP_REPEAT_DELAY) {
+        this.gpRepeating[dir] = true;
+        this.gpHeldTimer[dir] = 0;
+        action();
+      } else if (timer === delta) {
+        // First frame of press
+        action();
+      }
+    } else {
+      // Repeating
+      if (timer >= this.GP_REPEAT_INTERVAL) {
+        this.gpHeldTimer[dir] = 0;
+        action();
+      }
+    }
   }
 
   // ─── Input Handlers ────────────────────────────────────────────────
