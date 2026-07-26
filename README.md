@@ -1,5 +1,7 @@
 # Chrono Defender
 
+[Leer en Español](README.es.md)
+
 A fractured timeline is consuming the stars. Only the Aegis-7 Chronofighter can stop it.
 
 **Chrono Defender** is an original arcade-inspired horizontal scrolling shoot 'em up built with Phaser 3 and TypeScript. Players pilot an experimental chronofighter through collapsing timelines, collecting Chrono Shards to power upgrades, deploying Echo Drones, and ultimately destroying the Epoch Warden's exposed temporal core.
