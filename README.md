@@ -16,6 +16,13 @@ A fractured timeline is consuming the stars. Only the Aegis-7 Chronofighter can 
 
 - **Horizontal scrolling gameplay** — classic arcade shooter mechanics with modern implementation
 - **Original procedural graphics** — all visuals generated at runtime using Phaser Graphics; no external assets
+- **Navigable menu system** — title menu with High Scores, Achievements, Options, and Controls screens
+- **20 achievements** — combat, survival, collection, mastery, and dedication categories with progress tracking
+- **Persistent leaderboard** — top 10 scores saved to localStorage with wave, combo, and result data
+- **Gamepad support** — Xbox/PlayStation controllers with analog movement, dead zones, and button mapping
+- **Touch controls** — virtual joystick and fire button for mobile browsers
+- **Unified input** — keyboard, gamepad, and touch seamlessly combined via InputManager
+- **Extended settings** — volume, display, gameplay, and accessibility options with persistence
 - **Upgrade Rail system** — collect Chrono Shards to advance through six upgrade slots
 - **Echo Drone** — autonomous support orb that mirrors your movement and fires alongside you
 - **Boss battle** — face the Epoch Warden with its armored body and vulnerable temporal core
@@ -51,16 +58,20 @@ The game progresses through three phases:
 
 ## Controls
 
-| Action           | Key               |
-| ---------------- | ----------------- |
-| Move             | WASD / Arrow Keys |
-| Fire             | Space             |
-| Activate Upgrade | Shift             |
-| Pause / Resume   | P / Esc           |
-| Quit to Title    | Q (while paused)  |
-| Mute / Unmute    | M                 |
-| Start Game       | Enter             |
-| Restart          | R                 |
+| Action         | Keyboard          | Gamepad            |
+| -------------- | ----------------- | ------------------ |
+| Move           | WASD / Arrow Keys | Left Stick / D-Pad |
+| Fire           | Space / Click     | A / Cross          |
+| Pause / Resume | P / Esc           | Start              |
+| Quit to Title  | Q (while paused)  | —                  |
+| Mute / Unmute  | M                 | Y / Triangle       |
+| Next Weapon    | E                 | Right Bumper       |
+| Prev Weapon    | Q                 | Left Bumper        |
+| Start Game     | Enter             | A / Cross          |
+| Restart        | R                 | —                  |
+| Menu Navigate  | Arrow Keys        | D-Pad / Left Stick |
+| Confirm        | Enter             | A / Cross          |
+| Back           | Escape            | B / Circle         |
 
 ---
 

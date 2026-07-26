@@ -5,6 +5,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2025-07-26
+
+### Added
+
+- Navigable title menu with START GAME, HIGH SCORES, ACHIEVEMENTS, OPTIONS, CONTROLS
+- Persistent leaderboard: top 10 scores with wave, combo, weapon, date, result
+- Achievement system with 20 achievements across 5 categories (combat, survival, collection, mastery, dedication)
+- Achievement progress tracking and notification queue
+- Unified InputManager abstracting keyboard, gamepad, and touch input
+- GamepadManager with standard controller mapping, dead zones, and edge detection
+- TouchManager with virtual joystick and fire/pause/mute button areas
+- SettingsManager with type-safe get/set, defaults, and change notifications
+- Extended settings: master volume, fullscreen, screen shake, particle effects, reduced flashing, HUD scale, high contrast, difficulty, auto-fire, pause on focus loss, vibration, aim assist, reduced motion
+- Save schema v4 with migration from older versions
+- Debounced localStorage writes (max once per 500ms)
+- Clear scores with in-game confirmation dialog
+- Achievements screen with unlock count, progress, and hidden achievement support
+- Controls reference screen
+- High scores screen with rank/score/wave/combo/result/date table
+- 35 unit tests (SaveManager, AchievementManager, GamepadManager, DifficultyManager, ScoreManager)
+- Gamepad connect/disconnect notifications
+
+### Changed
+
+- Game starts from MenuScene instead of PrototypeScene directly
+- Quit to Title now navigates to MenuScene
+- SaveManager rewritten with schema versioning and leaderboard support
+
+### Technical
+
+- Schema migration preserves existing save data from v0.3.x
+- All new managers use singleton pattern
+- InputManager OR's actions across keyboard, gamepad, and touch sources
+- Edge-detection for discrete actions (pause, mute, confirm, weapon switch)
+- GamepadManager applies dead zone rescaling for smooth analog input
+- TouchManager tracks multi-touch against configurable screen areas
+- AchievementManager uses event-driven checking against 20 condition functions
+
 ## [0.3.0] - 2025-07-26
 
 ### Added

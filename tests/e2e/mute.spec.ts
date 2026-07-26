@@ -56,8 +56,9 @@ test.describe('Mute Toggle', () => {
     await page.waitForTimeout(3000);
   });
 
-  test('M key toggles mute on title screen', async ({ page }) => {
-    await focusGame(page);
+  test('M key toggles mute on menu screen', async ({ page }) => {
+    // Start game first (M only works in PrototypeScene)
+    await startGame(page);
 
     // Initially not muted
     expect(await isMuted(page)).toBe(false);

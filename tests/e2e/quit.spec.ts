@@ -30,17 +30,21 @@ async function pressKey(page: Page, key: string) {
   await page.waitForTimeout(300);
 }
 
-/** Get the current game phase from PrototypeScene. */
+/** Get the current game phase. Returns 'menu' if on MenuScene, or PrototypeScene phase. */
 async function getPhase(page: Page): Promise<string> {
   return page.evaluate(() => {
     const g = (
       window as unknown as {
         __PHASER_GAME__?: {
-          scene: { getScene: (key: string) => unknown };
+          scene: {
+            isActive: (key: string) => boolean;
+            getScene: (key: string) => unknown;
+          };
         };
       }
     ).__PHASER_GAME__;
     if (!g) return 'no-game';
+    if (g.scene.isActive('MenuScene')) return 'menu';
     const s = g.scene.getScene('PrototypeScene') as { phase?: string } | null;
     return s?.phase ?? 'no-scene';
   });
@@ -89,7 +93,7 @@ test.describe('Quit to Title', () => {
     await page.waitForTimeout(500);
 
     // Should be back on title/ready screen
-    expect(await getPhase(page)).toBe('ready');
+    expect(await getPhase(page)).toBe('menu');
     expect(await isGamePaused(page)).toBe(false);
   });
 
@@ -101,7 +105,7 @@ test.describe('Quit to Title', () => {
     await pressKey(page, 'q');
     await page.waitForTimeout(500);
 
-    expect(await getPhase(page)).toBe('ready');
+    expect(await getPhase(page)).toBe('menu');
 
     // Start a new game
     await startGame(page);
@@ -118,7 +122,7 @@ test.describe('Quit to Title', () => {
 
       await pressKey(page, 'q');
       await page.waitForTimeout(500);
-      expect(await getPhase(page)).toBe('ready');
+      expect(await getPhase(page)).toBe('menu');
     }
   });
 

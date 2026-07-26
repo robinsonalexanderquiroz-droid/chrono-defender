@@ -70,7 +70,6 @@ export class PrototypeScene extends Phaser.Scene {
     D: Phaser.Input.Keyboard.Key;
   };
   private spaceKey!: Phaser.Input.Keyboard.Key;
-  private enterKey!: Phaser.Input.Keyboard.Key;
   private restartKey!: Phaser.Input.Keyboard.Key;
   private shiftKey!: Phaser.Input.Keyboard.Key;
   private pausePKey!: Phaser.Input.Keyboard.Key;
@@ -138,7 +137,9 @@ export class PrototypeScene extends Phaser.Scene {
     this.setupGroups();
     this.setupPlayer();
     this.setupHUD();
-    this.showReadyScreen();
+
+    // Auto-start gameplay (MenuScene handles the title screen)
+    this.startGame();
   }
 
   override update(_time: number, delta: number): void {
@@ -150,10 +151,6 @@ export class PrototypeScene extends Phaser.Scene {
       this.updateMuteIndicator();
     }
 
-    if (this.phase === 'ready') {
-      if (Phaser.Input.Keyboard.JustDown(this.enterKey)) this.startGame();
-      return;
-    }
     if (this.phase === 'ended') {
       if (Phaser.Input.Keyboard.JustDown(this.restartKey)) this.scene.restart();
       return;
@@ -431,7 +428,6 @@ export class PrototypeScene extends Phaser.Scene {
       D: kb.addKey(Phaser.Input.Keyboard.KeyCodes.D),
     };
     this.spaceKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-    this.enterKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     this.restartKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     this.shiftKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
     this.pausePKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.P);
@@ -519,23 +515,6 @@ export class PrototypeScene extends Phaser.Scene {
       .setOrigin(1, 0)
       .setDepth(10);
     this.updateMuteIndicator();
-  }
-
-  private showReadyScreen(): void {
-    this.messageText.setText('CHRONO DEFENDER').setColor('#00ffff');
-    this.subtitleText.setText(
-      [
-        'A fractured timeline is consuming the stars.',
-        '',
-        'Move: Arrow Keys or WASD',
-        'Fire: Space',
-        'Activate Upgrade: Shift',
-        'Mute: M',
-        '',
-        'Press Enter to Start',
-      ].join('\n'),
-    );
-    audioManager.playMenuMusic();
   }
 
   private startGame(): void {

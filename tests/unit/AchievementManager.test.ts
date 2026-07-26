@@ -1,8 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { SaveManager } from '../../src/systems/SaveManager';
-import { AchievementManager } from '../../src/systems/AchievementManager';
-// Import module-level singletons to interact with their shared state
 import { saveManager } from '../../src/systems/SaveManager';
+import { AchievementManager } from '../../src/systems/AchievementManager';
 
 // ─── localStorage mock ──────────────────────────────────────────────────────
 
@@ -65,9 +63,7 @@ describe('AchievementManager', () => {
     // Check again — should not produce a new notification for first_launch
     am.check('gameStart', {});
     const notifications2 = am.getPendingNotifications();
-    const duplicateNotif = notifications2.find(
-      (n) => n.id === 'first_launch',
-    );
+    const duplicateNotif = notifications2.find((n) => n.id === 'first_launch');
     expect(duplicateNotif).toBeUndefined();
 
     // Unlocked list should have exactly one entry for first_launch
