@@ -49,6 +49,7 @@ The game progresses through three phases:
 | Move             | WASD / Arrow Keys |
 | Fire             | Space             |
 | Activate Upgrade | Shift             |
+| Pause / Resume   | P / Esc           |
 | Start Game       | Enter             |
 | Restart          | R                 |
 

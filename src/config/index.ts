@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 
+import { PauseScene } from '../scenes/PauseScene';
 import { PrototypeScene } from '../scenes/PrototypeScene';
 
 export const gameConfig: Phaser.Types.Core.GameConfig = {
@@ -17,5 +18,5 @@ export const gameConfig: Phaser.Types.Core.GameConfig = {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  scene: [PrototypeScene],
+  scene: [PrototypeScene, PauseScene],
 };

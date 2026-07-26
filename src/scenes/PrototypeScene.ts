@@ -66,6 +66,8 @@ export class PrototypeScene extends Phaser.Scene {
   private enterKey!: Phaser.Input.Keyboard.Key;
   private restartKey!: Phaser.Input.Keyboard.Key;
   private shiftKey!: Phaser.Input.Keyboard.Key;
+  private pausePKey!: Phaser.Input.Keyboard.Key;
+  private pauseEscKey!: Phaser.Input.Keyboard.Key;
 
   private lastFireTime = 0;
   private spawnTimer: Phaser.Time.TimerEvent | null = null;
@@ -137,6 +139,7 @@ export class PrototypeScene extends Phaser.Scene {
     }
 
     this.elapsed += delta;
+    this.handlePause();
     this.handleMovement();
     this.handleShooting();
     this.handleUpgradeActivation();
@@ -409,6 +412,8 @@ export class PrototypeScene extends Phaser.Scene {
     this.enterKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     this.restartKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     this.shiftKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
+    this.pausePKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+    this.pauseEscKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
   }
 
   private createStarfield(): void {
@@ -603,6 +608,19 @@ export class PrototypeScene extends Phaser.Scene {
           shot.setVelocityX(-200);
         }
       });
+    }
+  }
+
+  private handlePause(): void {
+    if (
+      Phaser.Input.Keyboard.JustDown(this.pausePKey) ||
+      Phaser.Input.Keyboard.JustDown(this.pauseEscKey)
+    ) {
+      // Prevent duplicate launches
+      if (!this.scene.isActive('PauseScene')) {
+        this.scene.pause();
+        this.scene.launch('PauseScene');
+      }
     }
   }
 
