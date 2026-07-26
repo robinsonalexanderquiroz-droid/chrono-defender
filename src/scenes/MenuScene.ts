@@ -282,7 +282,7 @@ export default class MenuScene extends Phaser.Scene {
         this.showAchievements();
         break;
       case 'OPTIONS':
-        this.showOptions();
+        this.scene.start('OptionsScene');
         break;
       case 'CONTROLS':
         this.showControls();
@@ -560,39 +560,6 @@ export default class MenuScene extends Phaser.Scene {
         .setDepth(6);
       this.submenuContainer.add(desc);
     }
-
-    this.addSubmenuFooter();
-  }
-
-  // ─── OPTIONS ───────────────────────────────────────────────────────
-
-  private showOptions(): void {
-    this.viewState = 'options';
-    this.showSubmenu();
-
-    if (!this.submenuContainer) return;
-    const { width, height } = this.scale;
-
-    const header = this.add
-      .text(width / 2, 80, 'OPTIONS', {
-        fontFamily: 'monospace',
-        fontSize: '32px',
-        color: CYAN,
-        fontStyle: 'bold',
-      })
-      .setOrigin(0.5)
-      .setDepth(6);
-    this.submenuContainer.add(header);
-
-    const placeholder = this.add
-      .text(width / 2, height / 2, 'Settings coming soon', {
-        fontFamily: 'monospace',
-        fontSize: '20px',
-        color: DIM,
-      })
-      .setOrigin(0.5)
-      .setDepth(6);
-    this.submenuContainer.add(placeholder);
 
     this.addSubmenuFooter();
   }
