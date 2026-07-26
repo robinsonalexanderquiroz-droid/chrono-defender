@@ -144,12 +144,7 @@ export const MINI_BOSS_INTERVAL = 5;
 // ─── Weapon Definitions ─────────────────────────────────────────────────────
 
 export type WeaponType =
-  | 'laser'
-  | 'spread'
-  | 'triple'
-  | 'rapid'
-  | 'piercing'
-  | 'plasma';
+  'laser' | 'spread' | 'triple' | 'rapid' | 'piercing' | 'plasma';
 
 export interface WeaponDef {
   name: string;

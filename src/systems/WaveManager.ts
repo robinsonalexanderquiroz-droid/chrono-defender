@@ -16,12 +16,7 @@ import {
 
 /** Possible wave states */
 type WaveState =
-  | 'spawning'
-  | 'active'
-  | 'intermission'
-  | 'miniboss'
-  | 'boss'
-  | 'complete';
+  'spawning' | 'active' | 'intermission' | 'miniboss' | 'boss' | 'complete';
 
 class WaveManager {
   private static instance: WaveManager | null = null;

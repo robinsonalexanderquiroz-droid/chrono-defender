@@ -76,8 +76,7 @@ class ScoreManager {
     }
 
     // Create popup
-    const comboText =
-      multiplier > 1 ? ` x${multiplier.toFixed(1)}` : '';
+    const comboText = multiplier > 1 ? ` x${multiplier.toFixed(1)}` : '';
     this.popups.push({
       text: `+${points}${comboText}`,
       x,

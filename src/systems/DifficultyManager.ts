@@ -6,7 +6,10 @@
  * Implements singleton pattern.
  */
 
-import { type DifficultyParams, getDifficultyForWave } from '../config/gameplay';
+import {
+  type DifficultyParams,
+  getDifficultyForWave,
+} from '../config/gameplay';
 
 class DifficultyManager {
   private static instance: DifficultyManager | null = null;

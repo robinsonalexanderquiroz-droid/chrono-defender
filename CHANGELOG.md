@@ -5,6 +5,43 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2025-07-26
+
+### Added
+
+- Data-driven gameplay configuration (`src/config/gameplay.ts`)
+- Five enemy type definitions: Scout, Interceptor, Heavy, Bomber, Sniper
+- Six weapon definitions: Standard Laser, Spread Shot, Triple Shot, Rapid Fire, Piercing Laser, Plasma Beam
+- Eight power-up types: Health, Shield, Weapon Upgrade, Rapid Fire, Score x2, Drone, Magnet, Invulnerability
+- EnemyManager with five movement patterns (straight, zigzag, stop-and-go, dive, orbit)
+- WeaponManager with weapon cycling and spread/piercing mechanics
+- PowerUpManager with weighted random drop system and timed effects
+- WaveManager with wave state machine and mini-boss/final boss triggers
+- ScoreManager with combo system, multiplier scaling, and floating score popups
+- DifficultyManager with adaptive scaling (HP, speed, spawn rate, projectile speed)
+- SaveManager with localStorage persistence (high score, stats, settings)
+- Mini-boss encounter definitions (Chrono Sentinel)
+- Wave composition formulas driven by wave number
+- Combo multiplier display in HUD
+- Current weapon name display in HUD
+- High score display on game over screen
+- Games played and bosses defeated tracking
+
+### Changed
+
+- Score system now uses ScoreManager with combo multiplier
+- HUD shows combo count, multiplier, and weapon name
+- Game over screen displays high score and combo stats
+- Game start increments games played counter
+- Boss defeat increments bosses defeated counter
+
+### Technical
+
+- All gameplay parameters defined in a single config module
+- Singleton pattern for all managers (matches AudioManager)
+- Managers reset cleanly on scene restart
+- No breaking changes to existing gameplay or E2E tests
+
 ## [0.2.0] - 2025-07-26
 
 ### Added

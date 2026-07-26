@@ -19,8 +19,15 @@ A fractured timeline is consuming the stars. Only the Aegis-7 Chronofighter can 
 - **Upgrade Rail system** — collect Chrono Shards to advance through six upgrade slots
 - **Echo Drone** — autonomous support orb that mirrors your movement and fires alongside you
 - **Boss battle** — face the Epoch Warden with its armored body and vulnerable temporal core
+- **Combo scoring** — chain kills for score multipliers up to 4x
+- **Five enemy types** — Scouts, Interceptors, Heavies, Bombers, and Snipers with unique movement patterns
+- **Six weapons** — Standard Laser, Spread Shot, Triple Shot, Rapid Fire, Piercing Laser, Plasma Beam
+- **Eight power-ups** — Health, Shield, Weapon Upgrade, Rapid Fire, Score x2, Drone, Magnet, Invulnerability
+- **Adaptive difficulty** — enemy HP, speed, and spawn rate scale with wave progression
+- **Mini-boss encounters** — Chrono Sentinel appears every 5 waves
+- **Persistent stats** — high score, games played, and bosses defeated saved to localStorage
+- **Procedural audio** — background music and 15+ sound effects synthesized at runtime
 - **Parallax starfield** — multi-layer scrolling background for depth
-- **Three enemy types** — Scouts, Heavy Drones, and the Epoch Warden boss
 - **TypeScript strict mode** — fully typed codebase with zero `any` usage
 - **Vite-powered** — fast development server with hot module replacement and optimized production builds
 - **MIT Licensed** — free to use, study, and extend
@@ -214,15 +221,24 @@ chrono-defender/
 - [x] Shield pulsing animation
 - [x] GitHub Actions CI/CD pipeline
 - [x] GitHub Pages deployment
+- [x] Procedural audio system
+- [x] Background music (title, gameplay, boss, victory, game over)
+- [x] Sound effects (15+ synthesized)
+- [x] Five enemy types with unique movement patterns
+- [x] Six weapon definitions
+- [x] Eight power-up types
+- [x] Combo scoring system
+- [x] Adaptive difficulty scaling
+- [x] Mini-boss encounter definitions
+- [x] localStorage persistence (high score, stats)
+- [x] Data-driven gameplay configuration
 
 ### Planned
 
 - [ ] Multiple stages with unique environments
-- [ ] Sound effects and background music
-- [ ] High score persistence (localStorage)
+- [ ] High score leaderboard
 - [ ] Additional boss encounters
-- [ ] Full MISSILE and BEAM upgrade implementations
-- [ ] Difficulty progression system
+- [ ] Full weapon switching during gameplay
 - [ ] Comprehensive unit test suite
 - [ ] Playwright E2E smoke tests
 - [ ] Mobile-responsive controls

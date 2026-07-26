@@ -5,14 +5,10 @@
  * based on EnemyDef configurations from the gameplay config.
  */
 
-import Phaser from 'phaser';
+import type Phaser from 'phaser';
 
-import {
-  type DifficultyParams,
-  type EnemyDef,
-  type EnemyType,
-  ENEMY_DEFS,
-} from '../config/gameplay';
+import type { DifficultyParams, EnemyDef, EnemyType } from '../config/gameplay';
+import { ENEMY_DEFS } from '../config/gameplay';
 
 /** Data keys stored on enemy sprites via setData */
 interface EnemyData {

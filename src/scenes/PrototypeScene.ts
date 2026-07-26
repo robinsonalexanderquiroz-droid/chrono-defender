@@ -1147,7 +1147,9 @@ export class PrototypeScene extends Phaser.Scene {
     }
     const highScore = saveManager.getStats().highScore;
     const highLabel =
-      this.score >= highScore ? '\nNEW HIGH SCORE!' : `\nHigh Score: ${highScore}`;
+      this.score >= highScore
+        ? '\nNEW HIGH SCORE!'
+        : `\nHigh Score: ${highScore}`;
     this.subtitleText
       .setText(
         `Final Score: ${this.score}${highLabel}\nCombo: ${scoreManager.getCombo()}x\n\nPress R to Restart`,
@@ -1160,7 +1162,9 @@ export class PrototypeScene extends Phaser.Scene {
     this.scoreText.setText(
       `Score: ${this.score}  Combo: ${scoreManager.getCombo()}x${scoreManager.getMultiplier() > 1 ? ` (${scoreManager.getMultiplier().toFixed(1)}x)` : ''}`,
     );
-    this.livesText.setText(`Lives: ${'◆'.repeat(this.lives)}  ${weaponManager.getWeaponDef().name}`);
+    this.livesText.setText(
+      `Lives: ${'◆'.repeat(this.lives)}  ${weaponManager.getWeaponDef().name}`,
+    );
     this.updateUpgradeRail();
     this.updateMuteIndicator();
   }

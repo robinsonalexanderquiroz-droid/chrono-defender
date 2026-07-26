@@ -6,13 +6,10 @@
  * durations. Implements singleton pattern.
  */
 
-import Phaser from 'phaser';
+import type Phaser from 'phaser';
 
-import {
-  type PowerUpType,
-  POWERUP_DEFS,
-  POWERUP_DROP_WEIGHTS,
-} from '../config/gameplay';
+import type { PowerUpType } from '../config/gameplay';
+import { POWERUP_DEFS, POWERUP_DROP_WEIGHTS } from '../config/gameplay';
 
 /** Represents an active timed power-up effect */
 interface ActiveEffect {
@@ -78,8 +75,7 @@ class PowerUpManager {
     const def = POWERUP_DEFS[type];
 
     const powerUp = group.create(x, y, 'powerup') as
-      | Phaser.Physics.Arcade.Sprite
-      | undefined;
+      Phaser.Physics.Arcade.Sprite | undefined;
 
     if (!powerUp) return null;
 

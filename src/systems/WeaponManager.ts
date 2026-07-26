@@ -57,7 +57,18 @@ class WeaponManager {
 
     if (count === 1) {
       // Single projectile, no spread calculation needed
-      this.spawnProjectile(scene, group, x, y, 0, speed, piercing, damage, color, width);
+      this.spawnProjectile(
+        scene,
+        group,
+        x,
+        y,
+        0,
+        speed,
+        piercing,
+        damage,
+        color,
+        width,
+      );
     } else {
       // Multiple projectiles with spread
       const halfSpread = spread / 2;
@@ -129,8 +140,7 @@ class WeaponManager {
     width: number,
   ): void {
     const projectile = group.create(x, y, 'player-projectile') as
-      | Phaser.Physics.Arcade.Sprite
-      | undefined;
+      Phaser.Physics.Arcade.Sprite | undefined;
 
     if (!projectile) return;
 

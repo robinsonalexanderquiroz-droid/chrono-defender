@@ -91,20 +91,29 @@ class SaveManager {
    */
   load(): SaveData {
     if (!this.storageAvailable) {
-      return { ...DEFAULT_SAVE_DATA, settings: { ...DEFAULT_SAVE_DATA.settings } };
+      return {
+        ...DEFAULT_SAVE_DATA,
+        settings: { ...DEFAULT_SAVE_DATA.settings },
+      };
     }
 
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw === null) {
-        return { ...DEFAULT_SAVE_DATA, settings: { ...DEFAULT_SAVE_DATA.settings } };
+        return {
+          ...DEFAULT_SAVE_DATA,
+          settings: { ...DEFAULT_SAVE_DATA.settings },
+        };
       }
 
       const parsed: unknown = JSON.parse(raw);
       return SaveManager.validateSaveData(parsed);
     } catch {
       // Corrupted data; return defaults
-      return { ...DEFAULT_SAVE_DATA, settings: { ...DEFAULT_SAVE_DATA.settings } };
+      return {
+        ...DEFAULT_SAVE_DATA,
+        settings: { ...DEFAULT_SAVE_DATA.settings },
+      };
     }
   }
 
@@ -213,7 +222,10 @@ class SaveManager {
    */
   private static validateSaveData(data: unknown): SaveData {
     if (typeof data !== 'object' || data === null) {
-      return { ...DEFAULT_SAVE_DATA, settings: { ...DEFAULT_SAVE_DATA.settings } };
+      return {
+        ...DEFAULT_SAVE_DATA,
+        settings: { ...DEFAULT_SAVE_DATA.settings },
+      };
     }
 
     const obj = data as Record<string, unknown>;
