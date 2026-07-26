@@ -82,6 +82,7 @@ export class PrototypeScene extends Phaser.Scene {
   private upgradeTexts: Phaser.GameObjects.Text[] = [];
   private messageText!: Phaser.GameObjects.Text;
   private subtitleText!: Phaser.GameObjects.Text;
+  private muteIndicator!: Phaser.GameObjects.Text;
 
   // Stars
   private stars: { obj: Phaser.GameObjects.Rectangle; speed: number }[] = [];
@@ -135,6 +136,7 @@ export class PrototypeScene extends Phaser.Scene {
     // Mute toggle works in all phases
     if (Phaser.Input.Keyboard.JustDown(this.muteKey)) {
       audioManager.toggleMute();
+      this.updateMuteIndicator();
     }
 
     if (this.phase === 'ready') {
@@ -498,6 +500,13 @@ export class PrototypeScene extends Phaser.Scene {
         .setVisible(false);
       this.upgradeTexts.push(t);
     }
+
+    // Mute indicator (top-right)
+    this.muteIndicator = this.add
+      .text(944, 16, '', { fontSize: '14px', color: '#ff6666' })
+      .setOrigin(1, 0)
+      .setDepth(10);
+    this.updateMuteIndicator();
   }
 
   private showReadyScreen(): void {
@@ -652,6 +661,11 @@ export class PrototypeScene extends Phaser.Scene {
       vy *= Math.SQRT1_2;
     }
     (this.player.body as Phaser.Physics.Arcade.Body).setVelocity(vx, vy);
+
+    // Thruster particles when moving
+    if ((vx !== 0 || vy !== 0) && Math.random() < 0.4) {
+      this.spawnThrusterParticle();
+    }
 
     // Record position for echo drone
     this.posHistory.push({ x: this.player.x, y: this.player.y });
@@ -878,6 +892,7 @@ export class PrototypeScene extends Phaser.Scene {
 
     // Invulnerability
     this.invulnerable = true;
+    this.flashPlayerDamage();
     this.player.setPosition(80, 270);
     let flickerState = true;
     this.flickerTimer = this.time.addEvent({
@@ -1116,6 +1131,13 @@ export class PrototypeScene extends Phaser.Scene {
     this.scoreText.setText(`Score: ${this.score}`);
     this.livesText.setText(`Lives: ${'◆'.repeat(this.lives)}`);
     this.updateUpgradeRail();
+    this.updateMuteIndicator();
+  }
+
+  private updateMuteIndicator(): void {
+    if (this.muteIndicator) {
+      this.muteIndicator.setText(audioManager.isMuted() ? 'MUTED [M]' : '');
+    }
   }
 
   private updateUpgradeRail(): void {
@@ -1134,21 +1156,72 @@ export class PrototypeScene extends Phaser.Scene {
 
   private spawnExplosion(x: number, y: number, scale: number): void {
     const colors = [0xffffff, 0xffff44, 0xff8800, 0xff4400];
-    for (let i = 0; i < 6; i++) {
+    const particleCount = Math.floor(8 + scale * 4);
+
+    // Flash ring
+    const ring = this.add.circle(x, y, 6 * scale, 0xffffff, 0.7);
+    ring.setDepth(9);
+    this.tweens.add({
+      targets: ring,
+      scaleX: 3 * scale,
+      scaleY: 3 * scale,
+      alpha: 0,
+      duration: 200,
+      onComplete: () => ring.destroy(),
+    });
+
+    // Particles
+    for (let i = 0; i < particleCount; i++) {
       const color = colors[i % colors.length] ?? 0xffffff;
-      const particle = this.add.circle(x, y, 4 * scale, color, 0.9);
+      const size = (2 + Math.random() * 3) * scale;
+      const particle = this.add.circle(x, y, size, color, 0.9);
       particle.setDepth(8);
-      const angle = (i / 6) * Math.PI * 2;
-      const dist = 20 + Math.random() * 20;
+      const angle = (i / particleCount) * Math.PI * 2 + Math.random() * 0.3;
+      const dist = (20 + Math.random() * 30) * scale;
       this.tweens.add({
         targets: particle,
-        x: x + Math.cos(angle) * dist * scale,
-        y: y + Math.sin(angle) * dist * scale,
+        x: x + Math.cos(angle) * dist,
+        y: y + Math.sin(angle) * dist,
         alpha: 0,
-        scale: 0.2,
-        duration: 300 + Math.random() * 200,
+        scale: 0.1,
+        duration: 250 + Math.random() * 250,
         onComplete: () => particle.destroy(),
       });
     }
+  }
+
+  /** Flash the player sprite red briefly to indicate damage. */
+  private flashPlayerDamage(): void {
+    this.player.setTint(0xff0000);
+    this.time.delayedCall(100, () => {
+      if (this.player.active) this.player.clearTint();
+    });
+  }
+
+  /** Spawn a thruster particle behind the player for visual feedback. */
+  private spawnThrusterParticle(): void {
+    if (
+      !this.player.active ||
+      !this.player.visible ||
+      this.phase !== 'playing'
+    )
+      return;
+    const body = this.player.body as Phaser.Physics.Arcade.Body;
+    if (body.velocity.x === 0 && body.velocity.y === 0) return;
+
+    const px = this.player.x - 18;
+    const py = this.player.y + (Math.random() - 0.5) * 8;
+    const colors = [0x00ffff, 0x0088ff, 0xffffff];
+    const color = colors[Math.floor(Math.random() * colors.length)] ?? 0x00ffff;
+    const particle = this.add.circle(px, py, 2, color, 0.6);
+    particle.setDepth(2);
+    this.tweens.add({
+      targets: particle,
+      x: px - 12 - Math.random() * 8,
+      alpha: 0,
+      scale: 0.3,
+      duration: 150 + Math.random() * 100,
+      onComplete: () => particle.destroy(),
+    });
   }
 }
