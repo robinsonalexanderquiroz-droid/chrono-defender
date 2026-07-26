@@ -16,20 +16,6 @@ async function pressKey(page: Page, key: string) {
   await page.waitForTimeout(300);
 }
 
-async function isSceneActive(page: Page, key: string): Promise<boolean> {
-  return page.evaluate((sceneKey) => {
-    const g = (
-      window as unknown as {
-        __PHASER_GAME__?: {
-          scene: { isActive: (key: string) => boolean };
-        };
-      }
-    ).__PHASER_GAME__;
-    if (!g) return false;
-    return g.scene.isActive(sceneKey);
-  }, key);
-}
-
 test.describe('Options Screen', () => {
   const errors: string[] = [];
 

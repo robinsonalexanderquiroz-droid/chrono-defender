@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.1] - 2025-07-26
+
+### Added
+
+- Full interactive OptionsScene with Audio, Display, Gameplay, Accessibility, and Data sections
+- Keyboard-navigable settings with sliders, toggles, and multi-choice controls
+- In-game confirmation modal for destructive data actions (no browser dialogs)
+- Visible mobile touch-control overlay (joystick, fire, pause, mute, weapon cycle buttons)
+- Weapon switching via keyboard (1-6 direct, E/Q cycle) and gamepad (bumpers)
+- Achievement notification toasts (slide-in from top-right, queued, respect reduced motion)
+- WeaponSwitcher class with edge-detected key input
+- AchievementNotificationRenderer with category-colored borders
+- TouchOverlay Phaser scene for touch-device rendering
+- SettingsManager unit tests (5 tests)
+- Options E2E tests (2 tests)
+
+### Changed
+
+- MenuScene OPTIONS item now launches dedicated OptionsScene (replaced placeholder)
+- PrototypeScene auto-starts gameplay (MenuScene handles title)
+- Settings changes apply immediately through SettingsManager
+- Touch overlay launches automatically on touch devices during gameplay
+
+### Fixed
+
+- Completed all v0.4.0 placeholder features that were architecturally defined but not user-facing
+
 ## [0.4.0] - 2025-07-26
 
 ### Added
