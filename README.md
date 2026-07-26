@@ -50,6 +50,7 @@ The game progresses through three phases:
 | Fire             | Space             |
 | Activate Upgrade | Shift             |
 | Pause / Resume   | P / Esc           |
+| Quit to Title    | Q (while paused)  |
 | Start Game       | Enter             |
 | Restart          | R                 |
 
