@@ -29,10 +29,13 @@ const FIRE_BUTTON_RADIUS = 60;
 const SMALL_BUTTON_SIZE = 36;
 
 /** Semi-transparent fill alpha for buttons */
-const BUTTON_ALPHA = 0.35;
+const BUTTON_ALPHA = 0.25;
 
 /** Pressed-state fill alpha for buttons */
-const BUTTON_PRESSED_ALPHA = 0.6;
+const BUTTON_PRESSED_ALPHA = 0.5;
+
+/** Safe area padding for notch/gesture areas */
+const SAFE_AREA_PAD = 20;
 
 /** Maximum joystick knob displacement in pixels */
 const JOYSTICK_MAX_DISPLACEMENT = 50;
@@ -137,7 +140,7 @@ class TouchOverlay extends Phaser.Scene {
   // ─── Private: Creation ─────────────────────────────────────────────
 
   private createJoystick(screenWidth: number, screenHeight: number): void {
-    const margin = 40;
+    const margin = SAFE_AREA_PAD + 20;
     this.joystickCenterX = margin + JOYSTICK_BASE_RADIUS;
     this.joystickCenterY = screenHeight - margin - JOYSTICK_BASE_RADIUS;
 
@@ -168,7 +171,7 @@ class TouchOverlay extends Phaser.Scene {
   }
 
   private createFireButton(screenWidth: number, screenHeight: number): void {
-    const margin = 40;
+    const margin = SAFE_AREA_PAD + 20;
     const cx = screenWidth - margin - FIRE_BUTTON_RADIUS;
     const cy = screenHeight - margin - FIRE_BUTTON_RADIUS;
 
@@ -189,7 +192,7 @@ class TouchOverlay extends Phaser.Scene {
   }
 
   private createPauseButton(screenWidth: number): void {
-    const margin = 16;
+    const margin = SAFE_AREA_PAD + 8;
     const cx = screenWidth - margin - SMALL_BUTTON_SIZE;
     const cy = margin + SMALL_BUTTON_SIZE;
 
@@ -225,7 +228,7 @@ class TouchOverlay extends Phaser.Scene {
   }
 
   private createMuteButton(): void {
-    const margin = 16;
+    const margin = SAFE_AREA_PAD + 8;
     const cx = margin + SMALL_BUTTON_SIZE;
     const cy = margin + SMALL_BUTTON_SIZE;
 

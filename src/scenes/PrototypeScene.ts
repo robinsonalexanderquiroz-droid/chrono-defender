@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 import { audioManager } from '../systems/AudioManager';
 import { achievementManager } from '../systems/AchievementManager';
 import { difficultyManager } from '../systems/DifficultyManager';
+import { gamepadManager } from '../systems/GamepadManager';
 import { saveManager } from '../systems/SaveManager';
 import { scoreManager } from '../systems/ScoreManager';
 import { waveManager } from '../systems/WaveManager';
@@ -167,6 +168,7 @@ export class PrototypeScene extends Phaser.Scene {
     scoreManager.update(delta);
     if (this.weaponSwitcher) this.weaponSwitcher.update();
     if (this.achievementRenderer) this.achievementRenderer.update();
+    this.checkGamepadNotification();
     this.handlePause();
     this.handleMovement();
     this.handleShooting();
@@ -1181,6 +1183,18 @@ export class PrototypeScene extends Phaser.Scene {
   private updateMuteIndicator(): void {
     if (this.muteIndicator) {
       this.muteIndicator.setText(audioManager.isMuted() ? 'MUTED [M]' : '');
+    }
+  }
+
+  private checkGamepadNotification(): void {
+    const msg = gamepadManager.getConnectionNotification();
+    if (msg && this.stageText) {
+      this.stageText.setText(msg);
+      this.time.delayedCall(2000, () => {
+        if (this.stageText && this.stageText.active) {
+          this.stageText.setText('');
+        }
+      });
     }
   }
 
