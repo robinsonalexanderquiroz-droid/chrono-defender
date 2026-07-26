@@ -6,6 +6,12 @@ A fractured timeline is consuming the stars. Only the Aegis-7 Chronofighter can 
 
 ---
 
+## Play Online
+
+**[Play Chrono Defender](https://robinsonalexanderquiroz-droid.github.io/chrono-defender/)**
+
+---
+
 ## Features
 
 - **Horizontal scrolling gameplay** — classic arcade shooter mechanics with modern implementation
@@ -84,17 +90,17 @@ The Shield:
 
 ## Technology
 
-| Category    | Tool                     |
-| ----------- | ------------------------ |
-| Game Engine | Phaser 3.90              |
-| Language    | TypeScript 5.9           |
-| Build Tool  | Vite 6.4                 |
-| Linter      | ESLint 10                |
-| Formatter   | Prettier 3.9             |
-| Unit Tests  | Vitest 4.1               |
-| E2E Tests   | Playwright 1.61          |
-| CI/CD       | GitHub Actions (planned) |
-| Hosting     | GitHub Pages (planned)   |
+| Category    | Tool            |
+| ----------- | --------------- |
+| Game Engine | Phaser 3.90     |
+| Language    | TypeScript 5.9  |
+| Build Tool  | Vite 6.4        |
+| Linter      | ESLint 10       |
+| Formatter   | Prettier 3.9    |
+| Unit Tests  | Vitest 4.1      |
+| E2E Tests   | Playwright 1.61 |
+| CI/CD       | GitHub Actions  |
+| Hosting     | GitHub Pages    |
 
 ---
 
@@ -192,6 +198,8 @@ chrono-defender/
 - [x] Parallax starfield
 - [x] Explosion effects
 - [x] Shield pulsing animation
+- [x] GitHub Actions CI/CD pipeline
+- [x] GitHub Pages deployment
 
 ### Planned
 
@@ -201,8 +209,6 @@ chrono-defender/
 - [ ] Additional boss encounters
 - [ ] Full MISSILE and BEAM upgrade implementations
 - [ ] Difficulty progression system
-- [ ] GitHub Actions CI/CD pipeline
-- [ ] GitHub Pages deployment
 - [ ] Comprehensive unit test suite
 - [ ] Playwright E2E smoke tests
 - [ ] Mobile-responsive controls
