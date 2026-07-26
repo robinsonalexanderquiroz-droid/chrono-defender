@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.2] - 2025-07-26
+
+### Added
+
+- Full gamepad navigation for OptionsScene (D-pad/stick navigate, A confirm, B back, Start back)
+- Gamepad repeat delay (400ms initial, 150ms interval) for held directional input
+- Achievement event integration: gameStart, enemyKill, combo, score, bossDefeat triggers wired to gameplay
+- Gamepad connection/disconnection notifications displayed in-game
+- Touch overlay safe-area padding (20px) for notch/gesture-bar devices
+- 24 achievement integration unit tests covering all 20 achievements
+- Achievement audit: all conditions verified reachable via gameplay events
+
+### Changed
+
+- Touch overlay opacity reduced (0.25) for less gameplay obstruction
+- Touch control margins use consistent safe-area-aware positioning
+- Options confirmation modal accessible via gamepad A (confirm) and B (cancel)
+- Removed duplicate `incrementGamesPlayed()` call in endGame
+
+### Technical
+
+- OptionsScene polls GamepadManager each frame with edge detection
+- Dead-zone and analog-stick threshold (0.5) for directional detection
+- Gamepad connection notification auto-dismisses after 2 seconds
+- All 20 achievement conditions tested with integration tests
+
 ## [0.4.1] - 2025-07-26
 
 ### Added
