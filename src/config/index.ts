@@ -11,6 +11,17 @@ export const gameConfig: Phaser.Types.Core.GameConfig = {
   width: 960,
   height: 540,
   backgroundColor: '#050a1a',
+  input: {
+    keyboard: {
+      capture: [
+        Phaser.Input.Keyboard.KeyCodes.UP,
+        Phaser.Input.Keyboard.KeyCodes.DOWN,
+        Phaser.Input.Keyboard.KeyCodes.LEFT,
+        Phaser.Input.Keyboard.KeyCodes.RIGHT,
+        Phaser.Input.Keyboard.KeyCodes.SPACE,
+      ],
+    },
+  },
   physics: {
     default: 'arcade',
     arcade: {

@@ -263,17 +263,6 @@ class InputManager {
   }
 
   private onKeyDown = (e: KeyboardEvent): void => {
-    // Prevent default for game keys to avoid browser scrolling
-    const preventKeys = new Set([
-      'ArrowUp',
-      'ArrowDown',
-      'ArrowLeft',
-      'ArrowRight',
-      'Space',
-    ]);
-    if (preventKeys.has(e.code)) {
-      e.preventDefault();
-    }
     this.keysDown.add(e.code);
   };
 
