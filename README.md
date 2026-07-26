@@ -51,6 +51,7 @@ The game progresses through three phases:
 | Activate Upgrade | Shift             |
 | Pause / Resume   | P / Esc           |
 | Quit to Title    | Q (while paused)  |
+| Mute / Unmute    | M                 |
 | Start Game       | Enter             |
 | Restart          | R                 |
 
@@ -87,6 +88,17 @@ The Shield:
 - Visibly surrounds the player with a pulsing energy ring
 - Absorbs exactly one hit from any source
 - Breaks and disappears after absorbing damage
+
+---
+
+## Audio
+
+All audio is generated procedurally at runtime using the Web Audio API — no external audio files are loaded.
+
+- **Background music** — unique themes for title screen, gameplay, boss fight, victory, and game over
+- **Sound effects** — laser fire, explosions, impacts, pickups, UI feedback
+- **Mute toggle** — press M at any time; visual indicator shows mute state
+- **Graceful degradation** — the game is fully playable without audio
 
 ---
 

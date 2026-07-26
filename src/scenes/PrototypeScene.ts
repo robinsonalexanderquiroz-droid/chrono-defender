@@ -1200,11 +1200,7 @@ export class PrototypeScene extends Phaser.Scene {
 
   /** Spawn a thruster particle behind the player for visual feedback. */
   private spawnThrusterParticle(): void {
-    if (
-      !this.player.active ||
-      !this.player.visible ||
-      this.phase !== 'playing'
-    )
+    if (!this.player.active || !this.player.visible || this.phase !== 'playing')
       return;
     const body = this.player.body as Phaser.Physics.Arcade.Body;
     if (body.velocity.x === 0 && body.velocity.y === 0) return;

@@ -5,6 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2025-07-26
+
+### Added
+
+- Procedural audio system (AudioManager) with Web Audio API synthesis
+- Background music: title theme, gameplay theme, boss theme, victory fanfare, game over theme
+- Sound effects: laser fire, enemy destroyed, boss damaged, boss defeated, player hit, player death, upgrade collected, echo drone attack, pause, resume, quit, start game
+- Mute toggle (M key) with persistent visual indicator
+- Enhanced particle explosions with flash ring effect
+- Player thruster particles during movement
+- Player damage flash (red tint) feedback
+- Camera shake on player damage
+- Mute indicator in HUD (top-right corner)
+- Pause/resume audio cues
+- Quit to title audio cue
+- Volume control architecture (music/SFX separation)
+- Graceful audio degradation (no errors when AudioContext unavailable)
+
+### Changed
+
+- Explosions now produce more particles with varied sizes and a bright ring flash
+- Pause overlay updated with Quit to Title option (Q key)
+- README updated with new controls and features
+
+### Technical
+
+- AudioManager singleton with Web Audio API oscillator synthesis
+- No external audio files required
+- Anti-clipping protection (max 12 simultaneous sounds)
+- Browser autoplay policy handling via resumeContext()
+
 ## [0.1.0] - 2025-07-26
 
 ### Added
