@@ -1,6 +1,11 @@
 import Phaser from 'phaser';
 
 import { audioManager } from '../systems/AudioManager';
+import { difficultyManager } from '../systems/DifficultyManager';
+import { saveManager } from '../systems/SaveManager';
+import { scoreManager } from '../systems/ScoreManager';
+import { waveManager } from '../systems/WaveManager';
+import { weaponManager } from '../systems/WeaponManager';
 
 type GamePhase = 'ready' | 'playing' | 'ended';
 type UpgradeSlot = 'THRUST' | 'MISSILE' | 'SPLIT' | 'BEAM' | 'ECHO' | 'SHIELD';
@@ -122,6 +127,12 @@ export class PrototypeScene extends Phaser.Scene {
     this.bossCoreExposed = false;
     this.bossHpBar = null;
 
+    // Reset all managers for a fresh game
+    scoreManager.reset();
+    waveManager.reset();
+    difficultyManager.reset();
+    weaponManager.reset();
+
     this.setupInput();
     this.createStarfield();
     this.setupGroups();
@@ -149,6 +160,7 @@ export class PrototypeScene extends Phaser.Scene {
     }
 
     this.elapsed += delta;
+    scoreManager.update(delta);
     this.handlePause();
     this.handleMovement();
     this.handleShooting();
@@ -541,6 +553,9 @@ export class PrototypeScene extends Phaser.Scene {
     audioManager.resumeContext();
     audioManager.playStartGame();
     audioManager.playGameMusic();
+    saveManager.incrementGamesPlayed();
+    waveManager.startNextWave();
+    difficultyManager.setWave(waveManager.getCurrentWave());
   }
 
   private setupCollisions(): void {
@@ -809,7 +824,9 @@ export class PrototypeScene extends Phaser.Scene {
     const hp = (e.getData('hp') as number) - 1;
     if (hp <= 0) {
       const isHeavy = e.getData('heavy') as boolean;
-      this.score += isHeavy ? 250 : 100;
+      const killScore = isHeavy ? 250 : 100;
+      scoreManager.addKill(killScore, e.x, e.y);
+      this.score = scoreManager.getScore();
       if (Math.random() < 0.3) this.dropShard(e.x, e.y);
       this.spawnExplosion(e.x, e.y, isHeavy ? 1.5 : 1.0);
       audioManager.playEnemyDestroyed();
@@ -1042,7 +1059,8 @@ export class PrototypeScene extends Phaser.Scene {
     if (this.phase !== 'playing' || !this.bossCoreExposed) return;
     (shot as Phaser.Physics.Arcade.Image).destroy();
     this.bossHp--;
-    this.score += 50;
+    scoreManager.addKill(50, this.boss?.x ?? 0, this.boss?.y ?? 0);
+    this.score = scoreManager.getScore();
     this.updateHUD();
     this.updateBossHpBar();
     audioManager.playBossDamaged();
@@ -1062,7 +1080,9 @@ export class PrototypeScene extends Phaser.Scene {
   }
 
   private defeatBoss(): void {
-    this.score += 2000;
+    scoreManager.addBonus(2000, 'BOSS DEFEATED', 480, 270);
+    this.score = scoreManager.getScore();
+    saveManager.incrementBossesDefeated();
     audioManager.playBossDefeated();
     if (this.boss) {
       this.spawnExplosion(this.boss.x, this.boss.y, 3.0);
@@ -1108,6 +1128,10 @@ export class PrototypeScene extends Phaser.Scene {
     this.player.setAlpha(1);
     this.time.removeAllEvents();
 
+    // Persist stats
+    saveManager.updateHighScore(this.score);
+    saveManager.incrementGamesPlayed();
+
     if (victory) {
       this.messageText
         .setText('TIMELINE RESTORED')
@@ -1121,15 +1145,22 @@ export class PrototypeScene extends Phaser.Scene {
         .setVisible(true);
       audioManager.playGameOverMusic();
     }
+    const highScore = saveManager.getStats().highScore;
+    const highLabel =
+      this.score >= highScore ? '\nNEW HIGH SCORE!' : `\nHigh Score: ${highScore}`;
     this.subtitleText
-      .setText(`Final Score: ${this.score}\n\nPress R to Restart`)
+      .setText(
+        `Final Score: ${this.score}${highLabel}\nCombo: ${scoreManager.getCombo()}x\n\nPress R to Restart`,
+      )
       .setColor('#ffffff')
       .setVisible(true);
   }
 
   private updateHUD(): void {
-    this.scoreText.setText(`Score: ${this.score}`);
-    this.livesText.setText(`Lives: ${'◆'.repeat(this.lives)}`);
+    this.scoreText.setText(
+      `Score: ${this.score}  Combo: ${scoreManager.getCombo()}x${scoreManager.getMultiplier() > 1 ? ` (${scoreManager.getMultiplier().toFixed(1)}x)` : ''}`,
+    );
+    this.livesText.setText(`Lives: ${'◆'.repeat(this.lives)}  ${weaponManager.getWeaponDef().name}`);
     this.updateUpgradeRail();
     this.updateMuteIndicator();
   }
