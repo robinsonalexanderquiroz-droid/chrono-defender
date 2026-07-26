@@ -6,6 +6,8 @@ import { saveManager } from '../systems/SaveManager';
 import { scoreManager } from '../systems/ScoreManager';
 import { waveManager } from '../systems/WaveManager';
 import { weaponManager } from '../systems/WeaponManager';
+import { AchievementNotificationRenderer } from '../ui/AchievementNotification';
+import { WeaponSwitcher } from '../ui/WeaponSwitcher';
 
 type GamePhase = 'ready' | 'playing' | 'ended';
 type UpgradeSlot = 'THRUST' | 'MISSILE' | 'SPLIT' | 'BEAM' | 'ECHO' | 'SHIELD';
@@ -88,6 +90,10 @@ export class PrototypeScene extends Phaser.Scene {
   private subtitleText!: Phaser.GameObjects.Text;
   private muteIndicator!: Phaser.GameObjects.Text;
 
+  // UI systems
+  private weaponSwitcher: WeaponSwitcher | null = null;
+  private achievementRenderer: AchievementNotificationRenderer | null = null;
+
   // Stars
   private stars: { obj: Phaser.GameObjects.Rectangle; speed: number }[] = [];
 
@@ -158,6 +164,8 @@ export class PrototypeScene extends Phaser.Scene {
 
     this.elapsed += delta;
     scoreManager.update(delta);
+    if (this.weaponSwitcher) this.weaponSwitcher.update();
+    if (this.achievementRenderer) this.achievementRenderer.update();
     this.handlePause();
     this.handleMovement();
     this.handleShooting();
@@ -535,6 +543,15 @@ export class PrototypeScene extends Phaser.Scene {
     saveManager.incrementGamesPlayed();
     waveManager.startNextWave();
     difficultyManager.setWave(waveManager.getCurrentWave());
+
+    // Initialize UI systems
+    this.weaponSwitcher = new WeaponSwitcher(this);
+    this.achievementRenderer = new AchievementNotificationRenderer(this);
+
+    // Launch touch overlay for mobile
+    if (!this.scene.isActive('TouchOverlay')) {
+      this.scene.launch('TouchOverlay');
+    }
   }
 
   private setupCollisions(): void {

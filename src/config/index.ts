@@ -4,6 +4,7 @@ import { MenuScene } from '../scenes/MenuScene';
 import { OptionsScene } from '../scenes/OptionsScene';
 import { PauseScene } from '../scenes/PauseScene';
 import { PrototypeScene } from '../scenes/PrototypeScene';
+import { TouchOverlay } from '../ui/TouchOverlay';
 
 export const gameConfig: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -20,5 +21,5 @@ export const gameConfig: Phaser.Types.Core.GameConfig = {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
   },
-  scene: [MenuScene, PrototypeScene, PauseScene, OptionsScene],
+  scene: [MenuScene, PrototypeScene, PauseScene, OptionsScene, TouchOverlay],
 };
