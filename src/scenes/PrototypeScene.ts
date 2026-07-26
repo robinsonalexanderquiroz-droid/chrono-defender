@@ -148,79 +148,251 @@ export class PrototypeScene extends Phaser.Scene {
   }
 
   private createTextures(): void {
-    // Player: angular cyan ship
-    const pg = this.make.graphics({ x: 0, y: 0 });
-    pg.fillStyle(0x00ffff);
-    pg.fillTriangle(0, 12, 28, 0, 28, 24);
-    pg.fillStyle(0xffffff);
-    pg.fillRect(6, 9, 14, 6);
-    pg.generateTexture('player', 28, 24);
-    pg.destroy();
+    this.createPlayerTexture();
+    this.createPlayerShotTexture();
+    this.createEnemySmallTexture();
+    this.createEnemyHeavyTexture();
+    this.createEnemyShotTexture();
+    this.createChronoShardTexture();
+    this.createEchoDroneTexture();
+    this.createBossTexture();
+    this.createBossCoreTexture();
+  }
 
-    // Enemy scout: small crimson
-    const eg = this.make.graphics({ x: 0, y: 0 });
-    eg.fillStyle(0xff2266);
-    eg.fillTriangle(20, 10, 0, 0, 0, 20);
-    eg.generateTexture('enemy-small', 20, 20);
-    eg.destroy();
+  private createPlayerTexture(): void {
+    const g = this.make.graphics({ x: 0, y: 0 });
+    const w = 48;
+    const h = 32;
+    // Engine exhausts (glow)
+    g.fillStyle(0x00ffff, 0.4);
+    g.fillCircle(4, 12, 5);
+    g.fillCircle(4, 20, 5);
+    g.fillStyle(0x00ffff, 0.8);
+    g.fillCircle(4, 12, 3);
+    g.fillCircle(4, 20, 3);
+    // Main hull
+    g.fillStyle(0x1db8ff);
+    g.fillTriangle(8, 4, 44, 16, 8, 28);
+    // Fuselage center
+    g.fillStyle(0x7eebff);
+    g.fillTriangle(14, 8, 44, 16, 14, 24);
+    // Nose point
+    g.fillStyle(0xffffff);
+    g.fillTriangle(40, 14, 48, 16, 40, 18);
+    // Cockpit canopy
+    g.fillStyle(0xffffff, 0.9);
+    g.fillCircle(28, 16, 4);
+    g.fillStyle(0x88ddff, 0.6);
+    g.fillCircle(28, 16, 3);
+    // Wing accents
+    g.lineStyle(1, 0x00ffff, 0.8);
+    g.lineBetween(10, 4, 30, 12);
+    g.lineBetween(10, 28, 30, 20);
+    // Rear stabilizers
+    g.fillStyle(0x1db8ff);
+    g.fillTriangle(6, 0, 14, 4, 6, 4);
+    g.fillTriangle(6, 28, 14, 28, 6, 32);
+    g.generateTexture('player', w, h);
+    g.destroy();
+  }
 
-    // Enemy heavy: larger magenta
-    const hg = this.make.graphics({ x: 0, y: 0 });
-    hg.fillStyle(0xcc22aa);
-    hg.fillRect(0, 0, 32, 28);
-    hg.fillStyle(0xff44cc);
-    hg.fillRect(4, 4, 24, 20);
-    hg.generateTexture('enemy-heavy', 32, 28);
-    hg.destroy();
+  private createPlayerShotTexture(): void {
+    const g = this.make.graphics({ x: 0, y: 0 });
+    // Outer glow
+    g.fillStyle(0x0066ff, 0.3);
+    g.fillEllipse(10, 5, 20, 10);
+    // Middle energy
+    g.fillStyle(0x00ccff, 0.7);
+    g.fillEllipse(10, 5, 14, 6);
+    // Core
+    g.fillStyle(0xffffff);
+    g.fillEllipse(12, 5, 8, 4);
+    g.generateTexture('player-shot', 20, 10);
+    g.destroy();
+  }
 
-    // Player shot: cyan line
-    const sg = this.make.graphics({ x: 0, y: 0 });
-    sg.fillStyle(0x00ffff);
-    sg.fillRect(0, 0, 14, 4);
-    sg.generateTexture('player-shot', 14, 4);
-    sg.destroy();
+  private createEnemySmallTexture(): void {
+    const g = this.make.graphics({ x: 0, y: 0 });
+    // Body
+    g.fillStyle(0x331111);
+    g.fillTriangle(0, 12, 24, 4, 24, 20);
+    // Wings
+    g.fillStyle(0xcc2233);
+    g.fillTriangle(8, 12, 24, 2, 24, 8);
+    g.fillTriangle(8, 12, 24, 16, 24, 22);
+    // Engine glow
+    g.fillStyle(0xff6600, 0.8);
+    g.fillCircle(22, 12, 3);
+    // Cockpit
+    g.fillStyle(0xff4444);
+    g.fillCircle(10, 12, 2);
+    g.generateTexture('enemy-small', 24, 24);
+    g.destroy();
+  }
 
-    // Enemy shot: red dot
-    const esg = this.make.graphics({ x: 0, y: 0 });
-    esg.fillStyle(0xff4444);
-    esg.fillCircle(4, 4, 4);
-    esg.generateTexture('enemy-shot', 8, 8);
-    esg.destroy();
+  private createEnemyHeavyTexture(): void {
+    const g = this.make.graphics({ x: 0, y: 0 });
+    const cx = 22;
+    const cy = 22;
+    // Hexagonal armored body
+    g.fillStyle(0x2a1133);
+    g.fillPoints(
+      [
+        { x: cx - 20, y: cy },
+        { x: cx - 10, y: cy - 16 },
+        { x: cx + 10, y: cy - 16 },
+        { x: cx + 20, y: cy },
+        { x: cx + 10, y: cy + 16 },
+        { x: cx - 10, y: cy + 16 },
+      ],
+      true,
+    );
+    // Inner armor
+    g.fillStyle(0x551155);
+    g.fillPoints(
+      [
+        { x: cx - 14, y: cy },
+        { x: cx - 7, y: cy - 11 },
+        { x: cx + 7, y: cy - 11 },
+        { x: cx + 14, y: cy },
+        { x: cx + 7, y: cy + 11 },
+        { x: cx - 7, y: cy + 11 },
+      ],
+      true,
+    );
+    // Glowing vents
+    g.fillStyle(0xff44cc, 0.9);
+    g.fillCircle(cx - 8, cy - 6, 2);
+    g.fillCircle(cx - 8, cy + 6, 2);
+    g.fillCircle(cx + 8, cy, 2);
+    // Engine
+    g.fillStyle(0xff6600, 0.7);
+    g.fillCircle(cx + 18, cy, 4);
+    g.generateTexture('enemy-heavy', 44, 44);
+    g.destroy();
+  }
 
-    // Chrono shard: orange diamond
-    const cg = this.make.graphics({ x: 0, y: 0 });
-    cg.fillStyle(0xffaa22);
-    cg.fillTriangle(8, 0, 16, 8, 8, 16);
-    cg.fillTriangle(8, 0, 0, 8, 8, 16);
-    cg.generateTexture('chrono-shard', 16, 16);
-    cg.destroy();
+  private createEnemyShotTexture(): void {
+    const g = this.make.graphics({ x: 0, y: 0 });
+    g.fillStyle(0x8800cc, 0.4);
+    g.fillCircle(6, 6, 6);
+    g.fillStyle(0xcc44ff, 0.8);
+    g.fillCircle(6, 6, 4);
+    g.fillStyle(0xffffff);
+    g.fillCircle(6, 6, 2);
+    g.generateTexture('enemy-shot', 12, 12);
+    g.destroy();
+  }
 
-    // Echo drone: blue orb
-    const dg = this.make.graphics({ x: 0, y: 0 });
-    dg.fillStyle(0x4488ff);
-    dg.fillCircle(8, 8, 8);
-    dg.fillStyle(0xaaccff);
-    dg.fillCircle(8, 8, 4);
-    dg.generateTexture('echo-drone', 16, 16);
-    dg.destroy();
+  private createChronoShardTexture(): void {
+    const g = this.make.graphics({ x: 0, y: 0 });
+    // Outer glow
+    g.fillStyle(0xff8800, 0.3);
+    g.fillCircle(10, 10, 10);
+    // Diamond shape
+    g.fillStyle(0xffaa22);
+    g.fillTriangle(10, 0, 20, 10, 10, 20);
+    g.fillTriangle(10, 0, 0, 10, 10, 20);
+    // Gold center
+    g.fillStyle(0xffdd44);
+    g.fillTriangle(10, 4, 16, 10, 10, 16);
+    g.fillTriangle(10, 4, 4, 10, 10, 16);
+    // White sparkle
+    g.fillStyle(0xffffff);
+    g.fillCircle(10, 10, 2);
+    g.generateTexture('chrono-shard', 20, 20);
+    g.destroy();
+  }
 
-    // Boss body
-    const bg = this.make.graphics({ x: 0, y: 0 });
-    bg.fillStyle(0x444466);
-    bg.fillRect(0, 0, 80, 120);
-    bg.fillStyle(0x666688);
-    bg.fillRect(10, 10, 60, 100);
-    bg.generateTexture('boss', 80, 120);
-    bg.destroy();
+  private createEchoDroneTexture(): void {
+    const g = this.make.graphics({ x: 0, y: 0 });
+    // Energy glow
+    g.fillStyle(0x2244ff, 0.3);
+    g.fillCircle(12, 12, 12);
+    // Wings
+    g.fillStyle(0x3366cc);
+    g.fillTriangle(4, 12, 12, 6, 12, 12);
+    g.fillTriangle(4, 12, 12, 12, 12, 18);
+    g.fillTriangle(20, 12, 12, 6, 12, 12);
+    g.fillTriangle(20, 12, 12, 12, 12, 18);
+    // Core
+    g.fillStyle(0x4488ff);
+    g.fillCircle(12, 12, 6);
+    g.fillStyle(0xaaccff);
+    g.fillCircle(12, 12, 3);
+    // Highlight
+    g.fillStyle(0xffffff, 0.8);
+    g.fillCircle(10, 10, 1.5);
+    g.generateTexture('echo-drone', 24, 24);
+    g.destroy();
+  }
 
-    // Boss core
-    const bcg = this.make.graphics({ x: 0, y: 0 });
-    bcg.fillStyle(0xffff00);
-    bcg.fillCircle(12, 12, 12);
-    bcg.fillStyle(0xffffff);
-    bcg.fillCircle(12, 12, 6);
-    bcg.generateTexture('boss-core', 24, 24);
-    bcg.destroy();
+  private createBossTexture(): void {
+    const g = this.make.graphics({ x: 0, y: 0 });
+    const w = 100;
+    const h = 140;
+    // Main armored body
+    g.fillStyle(0x1a1a2e);
+    g.fillRect(10, 20, 80, 100);
+    // Segmented armor panels
+    g.fillStyle(0x2d2d44);
+    g.fillRect(14, 24, 72, 20);
+    g.fillRect(14, 48, 72, 20);
+    g.fillRect(14, 72, 72, 20);
+    g.fillRect(14, 96, 72, 20);
+    // Panel edges
+    g.lineStyle(1, 0x4444aa, 0.6);
+    g.lineBetween(14, 44, 86, 44);
+    g.lineBetween(14, 68, 86, 68);
+    g.lineBetween(14, 92, 86, 92);
+    // Side cannons
+    g.fillStyle(0x333355);
+    g.fillRect(0, 30, 14, 16);
+    g.fillRect(0, 94, 14, 16);
+    g.fillStyle(0xff4444, 0.8);
+    g.fillCircle(4, 38, 3);
+    g.fillCircle(4, 102, 3);
+    // Front edge
+    g.fillStyle(0x3333aa);
+    g.fillRect(6, 20, 4, 100);
+    // Core housing (dark circle where core appears)
+    g.fillStyle(0x111122);
+    g.fillCircle(50, 70, 18);
+    g.lineStyle(2, 0x6666cc, 0.5);
+    g.strokeCircle(50, 70, 18);
+    // Animated lights (static representation)
+    g.fillStyle(0x00ffcc, 0.7);
+    g.fillCircle(30, 30, 2);
+    g.fillCircle(70, 30, 2);
+    g.fillCircle(30, 110, 2);
+    g.fillCircle(70, 110, 2);
+    // Top/bottom armor points
+    g.fillStyle(0x2d2d44);
+    g.fillTriangle(30, 20, 70, 20, 50, 8);
+    g.fillTriangle(30, 120, 70, 120, 50, 132);
+    g.generateTexture('boss', w, h);
+    g.destroy();
+  }
+
+  private createBossCoreTexture(): void {
+    const g = this.make.graphics({ x: 0, y: 0 });
+    // Outer pulsing ring
+    g.fillStyle(0xffff00, 0.3);
+    g.fillCircle(16, 16, 16);
+    // Energy ring
+    g.lineStyle(2, 0xffcc00, 0.8);
+    g.strokeCircle(16, 16, 12);
+    // Core glow
+    g.fillStyle(0xffaa00, 0.8);
+    g.fillCircle(16, 16, 10);
+    // Inner bright core
+    g.fillStyle(0xffff44);
+    g.fillCircle(16, 16, 6);
+    // White hot center
+    g.fillStyle(0xffffff);
+    g.fillCircle(16, 16, 3);
+    g.generateTexture('boss-core', 32, 32);
+    g.destroy();
   }
 
   private setupInput(): void {
@@ -544,12 +716,23 @@ export class PrototypeScene extends Phaser.Scene {
     this.shieldGraphic = this.add.circle(
       this.player.x,
       this.player.y,
-      22,
-      0x4488ff,
-      0.3,
+      26,
+      0x2266ff,
+      0.2,
     );
-    this.shieldGraphic.setStrokeStyle(2, 0x88ccff);
+    this.shieldGraphic.setStrokeStyle(3, 0x44aaff);
     this.shieldGraphic.setDepth(6);
+    // Pulse animation
+    this.tweens.add({
+      targets: this.shieldGraphic,
+      alpha: { from: 0.15, to: 0.4 },
+      scaleX: { from: 0.95, to: 1.05 },
+      scaleY: { from: 0.95, to: 1.05 },
+      duration: 600,
+      yoyo: true,
+      repeat: -1,
+      ease: 'Sine.easeInOut',
+    });
   }
 
   private updateShieldPosition(): void {
@@ -578,8 +761,8 @@ export class PrototypeScene extends Phaser.Scene {
     if (hp <= 0) {
       const isHeavy = e.getData('heavy') as boolean;
       this.score += isHeavy ? 250 : 100;
-      // Drop shard with 30% chance
       if (Math.random() < 0.3) this.dropShard(e.x, e.y);
+      this.spawnExplosion(e.x, e.y, isHeavy ? 1.5 : 1.0);
       e.destroy();
     } else {
       e.setData('hp', hp);
@@ -822,6 +1005,10 @@ export class PrototypeScene extends Phaser.Scene {
   private defeatBoss(): void {
     this.score += 2000;
     if (this.boss) {
+      this.spawnExplosion(this.boss.x, this.boss.y, 3.0);
+      this.spawnExplosion(this.boss.x - 30, this.boss.y - 20, 2.0);
+      this.spawnExplosion(this.boss.x + 20, this.boss.y + 30, 2.0);
+      this.cameras.main.shake(400, 0.01);
       this.boss.destroy();
       this.boss = null;
     }
@@ -895,6 +1082,26 @@ export class PrototypeScene extends Phaser.Scene {
       } else {
         t.setColor('#444444');
       }
+    }
+  }
+
+  private spawnExplosion(x: number, y: number, scale: number): void {
+    const colors = [0xffffff, 0xffff44, 0xff8800, 0xff4400];
+    for (let i = 0; i < 6; i++) {
+      const color = colors[i % colors.length] ?? 0xffffff;
+      const particle = this.add.circle(x, y, 4 * scale, color, 0.9);
+      particle.setDepth(8);
+      const angle = (i / 6) * Math.PI * 2;
+      const dist = 20 + Math.random() * 20;
+      this.tweens.add({
+        targets: particle,
+        x: x + Math.cos(angle) * dist * scale,
+        y: y + Math.sin(angle) * dist * scale,
+        alpha: 0,
+        scale: 0.2,
+        duration: 300 + Math.random() * 200,
+        onComplete: () => particle.destroy(),
+      });
     }
   }
 }
