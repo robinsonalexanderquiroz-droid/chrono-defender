@@ -7,7 +7,7 @@
  * This script automates the game through each visual state and captures
  * 960x540 PNG screenshots with no browser chrome or dev tools.
  */
-import { test } from '@playwright/test';
+import { test, type Page } from '@playwright/test';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -20,7 +20,7 @@ const GAME_HEIGHT = 540;
 /**
  * Wait for the Phaser canvas to be present and content to render.
  */
-async function waitForCanvas(page: import('@playwright/test').Page) {
+async function waitForCanvas(page: Page) {
   await page.waitForSelector('canvas', { timeout: 15_000 });
   // Wait for Phaser to boot and render the first frame.
   // In headless mode the first meaningful paint can take longer.
@@ -30,11 +30,7 @@ async function waitForCanvas(page: import('@playwright/test').Page) {
 /**
  * Dispatch a keyboard event into the page.
  */
-async function pressKey(
-  page: import('@playwright/test').Page,
-  key: string,
-  holdMs = 80,
-) {
+async function pressKey(page: Page, key: string, holdMs = 80) {
   await page.keyboard.down(key);
   await page.waitForTimeout(holdMs);
   await page.keyboard.up(key);
@@ -98,9 +94,7 @@ test.describe('Screenshot Capture', () => {
     await page.waitForTimeout(1000);
 
     // Fast-forward elapsed time past COMBAT_DURATION (65000ms)
-    await page.evaluate(
-      getSceneScript('scene.elapsed = 64800;'),
-    );
+    await page.evaluate(getSceneScript('scene.elapsed = 64800;'));
 
     // Wait for boss to spawn and tween into position
     await page.waitForTimeout(4000);
@@ -122,9 +116,7 @@ test.describe('Screenshot Capture', () => {
     await page.waitForTimeout(1000);
 
     // Fast-forward elapsed time
-    await page.evaluate(
-      getSceneScript('scene.elapsed = 64800;'),
-    );
+    await page.evaluate(getSceneScript('scene.elapsed = 64800;'));
 
     // Wait for boss to spawn and settle
     await page.waitForTimeout(5000);
