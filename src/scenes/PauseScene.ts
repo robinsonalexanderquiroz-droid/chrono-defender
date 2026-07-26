@@ -107,8 +107,8 @@ export class PauseScene extends Phaser.Scene {
     audioManager.stopMusic();
     // Stop the gameplay scene (cleans up its state)
     this.scene.stop('PrototypeScene');
-    // Restart PrototypeScene from scratch — returns to ready/title screen
-    this.scene.start('PrototypeScene');
+    // Go to MenuScene
+    this.scene.start('MenuScene');
     // Stop this pause scene
     this.scene.stop();
   }
