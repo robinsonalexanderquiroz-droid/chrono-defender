@@ -91,7 +91,7 @@ chrono-defender/
 - `systems/` may import from `config/` and `utils/`.
 - `ui/` may import from `config/` and `utils/`.
 - `utils/` must not import from any other src layer.
-- Circular imports are forbidden; ESLint `import/no-cycle` rule enforces this.
+- Circular imports are forbidden; ESLint `import-x/no-cycle` rule enforces this.
 
 ## TypeScript Rules
 

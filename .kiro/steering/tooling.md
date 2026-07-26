@@ -36,7 +36,7 @@ inclusion: always
 ## Linter — ESLint
 
 - Use the flat config format (`eslint.config.js`).
-- Required rule sets: `@typescript-eslint/recommended`, `import/no-cycle`.
+- Required rule sets: `@typescript-eslint/recommended`, `import-x/no-cycle`.
 - `no-console` should warn (not error) to allow temporary debug logging during development.
 - ESLint must pass with zero errors before merging any branch.
 - ESLint warnings are allowed but must not accumulate unchecked — a warning count ceiling may be added later.
@@ -50,6 +50,8 @@ inclusion: always
 
 ## Unit and Integration Tests — Vitest
 
+- Use **Vitest 4.x** as the unit and integration test runner.
+- Test functions (`describe`, `it`, `expect`, `vi`) must be explicitly imported from `vitest`; do not rely on global test APIs.
 - Test files live under `tests/unit/` and use the `.test.ts` suffix.
 - Tests run with `vitest --run` (single-pass, no watch) in CI.
 - Coverage is collected but a minimum threshold is not enforced in the MVP; thresholds may be added later.
