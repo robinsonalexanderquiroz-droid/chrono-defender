@@ -23,13 +23,10 @@ A fractured timeline is consuming the stars. Only the Aegis-7 Chronofighter can 
 
 ## Gameplay
 
-> Screenshots will be added in a future update.
-
-<!--
-![Title Screen](docs/screenshots/title.png)
-![Gameplay](docs/screenshots/gameplay.png)
-![Boss Fight](docs/screenshots/boss.png)
--->
+![Title Screen](docs/screenshots/title-screen.png)
+![Gameplay](docs/screenshots/gameplay.gif)
+![Boss Fight](docs/screenshots/boss-fight.png)
+![Victory](docs/screenshots/victory.png)
 
 The game progresses through three phases:
 
