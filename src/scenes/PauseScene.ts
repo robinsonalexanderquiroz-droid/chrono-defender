@@ -52,6 +52,10 @@ export class PauseScene extends Phaser.Scene {
     if (kb) {
       this.pKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.P);
       this.escKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+      // Reset key state to prevent the same keypress that triggered pause
+      // from immediately triggering resume on the first update frame.
+      this.pKey.reset();
+      this.escKey.reset();
     }
   }
 
