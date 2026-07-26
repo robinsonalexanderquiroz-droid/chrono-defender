@@ -1,1 +1,21 @@
-export {};
+import Phaser from 'phaser';
+
+import { PrototypeScene } from '../scenes/PrototypeScene';
+
+export const gameConfig: Phaser.Types.Core.GameConfig = {
+  type: Phaser.AUTO,
+  width: 960,
+  height: 540,
+  backgroundColor: '#080b18',
+  physics: {
+    default: 'arcade',
+    arcade: {
+      debug: false,
+    },
+  },
+  scale: {
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH,
+  },
+  scene: [PrototypeScene],
+};
