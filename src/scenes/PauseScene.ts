@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 
+import { audioManager } from '../systems/AudioManager';
+
 /**
  * PauseScene — launched above the gameplay scene to display a pause overlay.
  *
@@ -89,6 +91,7 @@ export class PauseScene extends Phaser.Scene {
   }
 
   private resumeGame(): void {
+    audioManager.playResume();
     // Resume the gameplay scene
     this.scene.resume('PrototypeScene');
     // Stop (remove) this pause scene
@@ -100,6 +103,8 @@ export class PauseScene extends Phaser.Scene {
     if (this.isQuitting) return;
     this.isQuitting = true;
 
+    audioManager.playQuit();
+    audioManager.stopMusic();
     // Stop the gameplay scene (cleans up its state)
     this.scene.stop('PrototypeScene');
     // Restart PrototypeScene from scratch — returns to ready/title screen

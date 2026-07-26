@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 
+import { audioManager } from '../systems/AudioManager';
+
 type GamePhase = 'ready' | 'playing' | 'ended';
 type UpgradeSlot = 'THRUST' | 'MISSILE' | 'SPLIT' | 'BEAM' | 'ECHO' | 'SHIELD';
 
@@ -68,6 +70,7 @@ export class PrototypeScene extends Phaser.Scene {
   private shiftKey!: Phaser.Input.Keyboard.Key;
   private pausePKey!: Phaser.Input.Keyboard.Key;
   private pauseEscKey!: Phaser.Input.Keyboard.Key;
+  private muteKey!: Phaser.Input.Keyboard.Key;
 
   private lastFireTime = 0;
   private spawnTimer: Phaser.Time.TimerEvent | null = null;
@@ -128,6 +131,11 @@ export class PrototypeScene extends Phaser.Scene {
 
   override update(_time: number, delta: number): void {
     this.scrollStars(delta);
+
+    // Mute toggle works in all phases
+    if (Phaser.Input.Keyboard.JustDown(this.muteKey)) {
+      audioManager.toggleMute();
+    }
 
     if (this.phase === 'ready') {
       if (Phaser.Input.Keyboard.JustDown(this.enterKey)) this.startGame();
@@ -414,6 +422,7 @@ export class PrototypeScene extends Phaser.Scene {
     this.shiftKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT);
     this.pausePKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.P);
     this.pauseEscKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+    this.muteKey = kb.addKey(Phaser.Input.Keyboard.KeyCodes.M);
   }
 
   private createStarfield(): void {
@@ -500,10 +509,12 @@ export class PrototypeScene extends Phaser.Scene {
         'Move: Arrow Keys or WASD',
         'Fire: Space',
         'Activate Upgrade: Shift',
+        'Mute: M',
         '',
         'Press Enter to Start',
       ].join('\n'),
     );
+    audioManager.playMenuMusic();
   }
 
   private startGame(): void {
@@ -518,6 +529,9 @@ export class PrototypeScene extends Phaser.Scene {
     this.updateHUD();
     this.setupCollisions();
     this.startSpawning();
+    audioManager.resumeContext();
+    audioManager.playStartGame();
+    audioManager.playGameMusic();
   }
 
   private setupCollisions(): void {
@@ -618,6 +632,7 @@ export class PrototypeScene extends Phaser.Scene {
     ) {
       // Prevent duplicate launches
       if (!this.scene.isActive('PauseScene')) {
+        audioManager.playPause();
         this.scene.pause();
         this.scene.launch('PauseScene');
       }
@@ -656,6 +671,7 @@ export class PrototypeScene extends Phaser.Scene {
     // Echo drone fires too
     if (this.echoDrone && this.echoDrone.active) {
       this.firePlayerShot(this.echoDrone.x + 10, this.echoDrone.y);
+      audioManager.playEchoDroneAttack();
     }
   }
 
@@ -667,6 +683,7 @@ export class PrototypeScene extends Phaser.Scene {
     ) as Phaser.Physics.Arcade.Image;
     shot.setVelocityX(this.SHOT_SPEED);
     shot.setDepth(3);
+    audioManager.playLaser();
   }
 
   private handleUpgradeActivation(): void {
@@ -781,6 +798,7 @@ export class PrototypeScene extends Phaser.Scene {
       this.score += isHeavy ? 250 : 100;
       if (Math.random() < 0.3) this.dropShard(e.x, e.y);
       this.spawnExplosion(e.x, e.y, isHeavy ? 1.5 : 1.0);
+      audioManager.playEnemyDestroyed();
       e.destroy();
     } else {
       e.setData('hp', hp);
@@ -810,6 +828,7 @@ export class PrototypeScene extends Phaser.Scene {
     (shard as Phaser.Physics.Arcade.Image).destroy();
     this.upgradeIndex = Math.min(this.upgradeIndex + 1, UPGRADES.length);
     this.updateUpgradeRail();
+    audioManager.playUpgradeCollected();
   }
 
   private onEnemyHitPlayer(
@@ -833,6 +852,7 @@ export class PrototypeScene extends Phaser.Scene {
   private damagePlayer(): void {
     if (this.hasShield) {
       this.removeShield();
+      audioManager.playPlayerHit();
       return;
     }
     this.lives--;
@@ -846,11 +866,15 @@ export class PrototypeScene extends Phaser.Scene {
     this.upgradeIndex = 0;
     this.updateUpgradeRail();
     this.updateHUD();
+    this.cameras.main.shake(150, 0.008);
 
     if (this.lives <= 0) {
+      audioManager.playPlayerDeath();
       this.endGame(false);
       return;
     }
+
+    audioManager.playPlayerHit();
 
     // Invulnerability
     this.invulnerable = true;
@@ -915,6 +939,7 @@ export class PrototypeScene extends Phaser.Scene {
     this.boss = this.physics.add.image(1020, 270, 'boss');
     this.boss.setDepth(5);
     this.boss.setImmovable(true);
+    audioManager.playBossMusic();
 
     // Move boss into position
     this.tweens.add({
@@ -1005,6 +1030,7 @@ export class PrototypeScene extends Phaser.Scene {
     this.score += 50;
     this.updateHUD();
     this.updateBossHpBar();
+    audioManager.playBossDamaged();
     if (this.bossHp <= 0) {
       this.defeatBoss();
     }
@@ -1022,6 +1048,7 @@ export class PrototypeScene extends Phaser.Scene {
 
   private defeatBoss(): void {
     this.score += 2000;
+    audioManager.playBossDefeated();
     if (this.boss) {
       this.spawnExplosion(this.boss.x, this.boss.y, 3.0);
       this.spawnExplosion(this.boss.x - 30, this.boss.y - 20, 2.0);
@@ -1071,11 +1098,13 @@ export class PrototypeScene extends Phaser.Scene {
         .setText('TIMELINE RESTORED')
         .setColor('#00ff88')
         .setVisible(true);
+      audioManager.playVictoryMusic();
     } else {
       this.messageText
         .setText('TIMELINE COLLAPSED')
         .setColor('#ff3333')
         .setVisible(true);
+      audioManager.playGameOverMusic();
     }
     this.subtitleText
       .setText(`Final Score: ${this.score}\n\nPress R to Restart`)
