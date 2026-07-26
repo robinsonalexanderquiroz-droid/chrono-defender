@@ -1,9 +1,16 @@
 import tseslint from '@typescript-eslint/eslint-plugin';
 import importX from 'eslint-plugin-import-x';
+import prettier from 'eslint-config-prettier';
 
 export default [
   {
-    ignores: ['dist/', 'coverage/', 'node_modules/', 'playwright-report/', 'test-results/'],
+    ignores: [
+      'dist/',
+      'coverage/',
+      'node_modules/',
+      'playwright-report/',
+      'test-results/',
+    ],
   },
 
   ...tseslint.configs['flat/recommended'],
@@ -11,7 +18,16 @@ export default [
   {
     plugins: { 'import-x': importX },
     settings: {
-      'import-x/extensions': ['.ts', '.tsx', '.mts', '.cts', '.js', '.jsx', '.mjs', '.cjs'],
+      'import-x/extensions': [
+        '.ts',
+        '.tsx',
+        '.mts',
+        '.cts',
+        '.js',
+        '.jsx',
+        '.mjs',
+        '.cjs',
+      ],
       'import-x/resolver-next': [importX.createNodeResolver()],
     },
   },
@@ -37,7 +53,14 @@ export default [
       'import-x/order': [
         'warn',
         {
-          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+          ],
           'newlines-between': 'always',
           alphabetize: { order: 'asc', caseInsensitive: true },
         },
@@ -52,4 +75,7 @@ export default [
       sourceType: 'module',
     },
   },
+
+  // Prettier must be last — disables formatting rules that conflict with Prettier
+  prettier,
 ];
