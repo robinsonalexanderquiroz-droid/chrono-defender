@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chrono Defender - Presentación Hackathon</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0a1a; color: #ffffff; }
+  .slide { width: 100%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 80px; page-break-after: always; position: relative; }
+  .slide::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at center, #0d1a2f 0%, #0a0a1a 70%); z-index: -1; }
+  h1 { font-size: 3.2em; color: #00ffff; text-align: center; margin-bottom: 20px; text-shadow: 0 0 20px rgba(0,255,255,0.3); }
+  h2 { font-size: 2.2em; color: #00ffff; text-align: center; margin-bottom: 30px; }
+  h3 { font-size: 1.4em; color: #ffcc00; margin-bottom: 15px; }
+  p { font-size: 1.2em; line-height: 1.7; color: #cccccc; text-align: center; max-width: 900px; }
+  .subtitle { font-size: 1.5em; color: #88aacc; margin-bottom: 40px; text-align: center; }
+  ul { list-style: none; font-size: 1.15em; line-height: 2; max-width: 850px; }
+  ul li { padding-left: 30px; position: relative; color: #dddddd; }
+  ul li::before { content: '▸'; position: absolute; left: 0; color: #00ffff; font-weight: bold; }
+  .highlight { color: #00ffff; font-weight: bold; }
+  .accent { color: #ffcc00; font-weight: bold; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 950px; width: 100%; }
+  .grid-item { background: rgba(0,255,255,0.05); border: 1px solid rgba(0,255,255,0.2); border-radius: 12px; padding: 25px; }
+  .grid-item h3 { text-align: center; }
+  .grid-item ul { font-size: 1em; }
+  .stat-row { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; margin-top: 30px; }
+  .stat { text-align: center; }
+  .stat-number { font-size: 3em; color: #00ffff; font-weight: bold; }
+  .stat-label { font-size: 0.95em; color: #888888; margin-top: 5px; }
+  .arch-box { background: rgba(0,100,200,0.1); border: 1px solid rgba(0,255,255,0.3); border-radius: 10px; padding: 20px 30px; margin: 10px 0; width: 100%; max-width: 800px; }
+  .arch-box code { color: #00ffcc; font-family: 'Fira Code', monospace; font-size: 0.95em; }
+  .footer { position: absolute; bottom: 20px; font-size: 0.85em; color: #555555; }
+  .tag { display: inline-block; background: rgba(0,255,255,0.15); border: 1px solid #00ffff; border-radius: 20px; padding: 5px 15px; margin: 5px; font-size: 0.9em; color: #00ffff; }
+  .url { color: #00ccff; font-size: 1.1em; margin-top: 20px; }
+  @media print { .slide { min-height: 100vh; } body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: PORTADA -->
+<div class="slide">
+  <h1>CHRONO DEFENDER</h1>
+  <p class="subtitle">Un Arcade Shooter completo construido desde cero en el navegador</p>
+  <p>Phaser 3 &bull; TypeScript &bull; Web Audio API &bull; Zero Assets Externos</p>
+  <div class="stat-row" style="margin-top:50px;">
+    <div class="stat"><div class="stat-number">0</div><div class="stat-label">Archivos de arte externos</div></div>
+    <div class="stat"><div class="stat-number">0</div><div class="stat-label">Archivos de audio</div></div>
+    <div class="stat"><div class="stat-number">0</div><div class="stat-label">Backend requerido</div></div>
+  </div>
+  <p class="url">https://robinsonalexanderquiroz-droid.github.io/chrono-defender/</p>
+  <div class="footer">Hackathon 2026 — Robinson Alexander Quiroz</div>
+</div>
+
+<!-- SLIDE 2: PROBLEMA Y SOLUCIÓN -->
+<div class="slide">
+  <h2>El Desafío</h2>
+  <p style="margin-bottom:40px;">Crear un juego arcade completo, jugable, desplegado y testeado — sin dependencias externas de arte o sonido, usando exclusivamente tecnologías web modernas.</p>
+  <h3>La Solución: Chrono Defender</h3>
+  <ul>
+    <li>Juego de disparos horizontal con progresión infinita de oleadas</li>
+    <li>Todo el arte generado proceduralmente con Phaser Graphics</li>
+    <li>Todo el audio sintetizado en tiempo real con Web Audio API</li>
+    <li>Persistencia completa en localStorage sin servidor</li>
+    <li>Soporte multi-plataforma: teclado, gamepad y táctil</li>
+    <li>Desplegado automáticamente en GitHub Pages con CI/CD</li>
+  </ul>
+  <div class="footer">Chrono Defender — Presentación Hackathon</div>
+</div>
+
+<!-- SLIDE 3: POR QUÉ DEBERÍA GANAR -->
+<div class="slide">
+  <h2>¿Por Qué Chrono Defender Debería Ganar?</h2>
+  <div class="grid">
+    <div class="grid-item">
+      <h3>Complejidad Técnica</h3>
+      <ul>
+        <li>13 managers singleton especializados</li>
+        <li>TypeScript estricto (zero <code>any</code>)</li>
+        <li>Síntesis de audio procedural</li>
+        <li>5 patrones de movimiento de IA</li>
+        <li>Sistema de dificultad adaptativa</li>
+      </ul>
+    </div>
+    <div class="grid-item">
+      <h3>Producto Completo</h3>
+      <ul>
+        <li>Jugable inmediatamente en el navegador</li>
+        <li>20 logros con progreso persistente</li>
+        <li>Tabla de clasificación top 10</li>
+        <li>Pantalla de opciones interactiva</li>
+        <li>Soporte de accesibilidad</li>
+      </ul>
+    </div>
+    <div class="grid-item">
+      <h3>Calidad de Ingeniería</h3>
+      <ul>
+        <li>64 tests unitarios</li>
+        <li>26 tests end-to-end</li>
+        <li>CI/CD con GitHub Actions</li>
+        <li>0 vulnerabilidades en auditoría</li>
+        <li>Código formateado y lintado</li>
+      </ul>
+    </div>
+    <div class="grid-item">
+      <h3>Innovación</h3>
+      <ul>
+        <li>Sin archivos de arte ni audio</li>
+        <li>Configuración declarativa de gameplay</li>
+        <li>Input unificado (3 fuentes)</li>
+        <li>Migración automática de saves</li>
+        <li>Gamepad con zonas muertas</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer">Chrono Defender — Presentación Hackathon</div>
+</div>
+
+<!-- SLIDE 4: ARQUITECTURA -->
+<div class="slide">
+  <h2>Arquitectura del Sistema</h2>
+  <div class="arch-box">
+    <code>
+src/<br>
+├── config/gameplay.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Configuración declarativa de todo el juego<br>
+├── scenes/<br>
+│&nbsp;&nbsp; ├── MenuScene.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Menú navegable con submenús<br>
+│&nbsp;&nbsp; ├── PrototypeScene.ts &nbsp;&nbsp;&nbsp;&nbsp;← Loop principal de gameplay<br>
+│&nbsp;&nbsp; ├── PauseScene.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Overlay de pausa con quit<br>
+│&nbsp;&nbsp; └── OptionsScene.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← 16+ opciones configurables<br>
+├── systems/<br>
+│&nbsp;&nbsp; ├── AudioManager.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← 15+ sonidos sintetizados<br>
+│&nbsp;&nbsp; ├── EnemyManager.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← 5 tipos, 5 patrones de IA<br>
+│&nbsp;&nbsp; ├── WeaponManager.ts &nbsp;&nbsp;&nbsp;&nbsp;← 6 armas con spread/piercing<br>
+│&nbsp;&nbsp; ├── ScoreManager.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Combos hasta 4x multiplicador<br>
+│&nbsp;&nbsp; ├── WaveManager.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Oleadas + mini-jefes + jefe final<br>
+│&nbsp;&nbsp; ├── DifficultyManager.ts &nbsp;← Escalado adaptativo por oleada<br>
+│&nbsp;&nbsp; ├── SaveManager.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Schema v4 + migración automática<br>
+│&nbsp;&nbsp; ├── AchievementManager.ts ← 20 logros event-driven<br>
+│&nbsp;&nbsp; ├── InputManager.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Teclado + Gamepad + Táctil<br>
+│&nbsp;&nbsp; ├── GamepadManager.ts &nbsp;&nbsp;&nbsp;← Dead zones + analog + edge detect<br>
+│&nbsp;&nbsp; ├── TouchManager.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Joystick virtual multi-touch<br>
+│&nbsp;&nbsp; └── SettingsManager.ts &nbsp;&nbsp;&nbsp;← Get/Set tipado con persistencia<br>
+└── ui/<br>
+&nbsp;&nbsp;&nbsp; ├── TouchOverlay.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Controles visibles en móvil<br>
+&nbsp;&nbsp;&nbsp; ├── AchievementNotification.ts ← Toasts animados<br>
+&nbsp;&nbsp;&nbsp; └── WeaponSwitcher.ts &nbsp;&nbsp;&nbsp;&nbsp;← Cambio de arma con teclas 1-6<br>
+    </code>
+  </div>
+  <div class="footer">Chrono Defender — Presentación Hackathon</div>
+</div>
+
+<!-- SLIDE 5: AUDIO PROCEDURAL -->
+<div class="slide">
+  <h2>Audio 100% Procedural</h2>
+  <p style="margin-bottom:30px;">Ningún archivo de audio. Todo sintetizado en tiempo real con la Web Audio API.</p>
+  <div class="grid">
+    <div class="grid-item">
+      <h3>5 Temas Musicales</h3>
+      <ul>
+        <li>Menú: pad ambiental con filtro</li>
+        <li>Gameplay: bajo pulsante + arpegio</li>
+        <li>Jefe: distorsión + stabs disonantes</li>
+        <li>Victoria: fanfarria triunfante</li>
+        <li>Game Over: melodía descendente</li>
+      </ul>
+    </div>
+    <div class="grid-item">
+      <h3>15+ Efectos de Sonido</h3>
+      <ul>
+        <li>Láser: barrido de frecuencia</li>
+        <li>Explosión: ráfaga de ruido</li>
+        <li>Pickup: arpegio ascendente</li>
+        <li>Impacto: onda cuadrada grave</li>
+        <li>UI: tonos de dos notas</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:30px;">Máximo 12 nodos de audio simultáneos para prevenir clipping.<br>Degradación elegante si AudioContext no está disponible.</p>
+  <div class="footer">Chrono Defender — Presentación Hackathon</div>
+</div>
+
+<!-- SLIDE 6: GAMEPLAY Y CONTENIDO -->
+<div class="slide">
+  <h2>Contenido del Juego</h2>
+  <div class="stat-row">
+    <div class="stat"><div class="stat-number">5</div><div class="stat-label">Tipos de Enemigos</div></div>
+    <div class="stat"><div class="stat-number">6</div><div class="stat-label">Armas</div></div>
+    <div class="stat"><div class="stat-number">8</div><div class="stat-label">Power-Ups</div></div>
+    <div class="stat"><div class="stat-number">20</div><div class="stat-label">Logros</div></div>
+    <div class="stat"><div class="stat-number">16</div><div class="stat-label">Opciones</div></div>
+  </div>
+  <ul style="margin-top:40px;">
+    <li><span class="highlight">Enemigos:</span> Scout, Interceptor, Heavy, Bomber, Sniper — cada uno con patrón de IA único</li>
+    <li><span class="highlight">Armas:</span> Láser, Disperso, Triple, Rápido, Perforante, Plasma — cambio con teclas 1-6</li>
+    <li><span class="highlight">Dificultad:</span> HP +10%/oleada, Velocidad +5%/oleada, Spawn -5%/oleada (con caps)</li>
+    <li><span class="highlight">Jefes:</span> Mini-jefe cada 5 oleadas + Jefe final (Guardián de la Época)</li>
+    <li><span class="highlight">Combos:</span> Encadena eliminaciones en 2s para multiplicador hasta 4x</li>
+    <li><span class="highlight">Persistencia:</span> High scores, logros, estadísticas, configuraciones — todo en localStorage</li>
+  </ul>
+  <div class="footer">Chrono Defender — Presentación Hackathon</div>
+</div>
+
+<!-- SLIDE 7: TESTING Y CI/CD -->
+<div class="slide">
+  <h2>Testing y Calidad</h2>
+  <div class="stat-row">
+    <div class="stat"><div class="stat-number">64</div><div class="stat-label">Tests Unitarios</div></div>
+    <div class="stat"><div class="stat-number">26</div><div class="stat-label">Tests E2E</div></div>
+    <div class="stat"><div class="stat-number">0</div><div class="stat-label">Vulnerabilidades</div></div>
+    <div class="stat"><div class="stat-number">0</div><div class="stat-label">Errores de Lint</div></div>
+  </div>
+  <ul style="margin-top:40px;">
+    <li><span class="accent">Vitest:</span> SaveManager, AchievementManager, GamepadManager, DifficultyManager, ScoreManager, SettingsManager</li>
+    <li><span class="accent">Playwright:</span> Navegación de menú, pausa/resume, quit, mute, gameplay completo, opciones</li>
+    <li><span class="accent">CI/CD:</span> typecheck → lint → format → test → build → e2e → audit en cada push</li>
+    <li><span class="accent">Despliegue:</span> GitHub Pages automático tras CI exitoso</li>
+    <li><span class="accent">Seguridad:</span> Dependencias pinneadas, npm audit en CI, sin secretos</li>
+  </ul>
+  <div class="footer">Chrono Defender — Presentación Hackathon</div>
+</div>
+
+<!-- SLIDE 8: ACCESIBILIDAD Y MULTI-PLATAFORMA -->
+<div class="slide">
+  <h2>Accesibilidad y Multi-Plataforma</h2>
+  <div class="grid">
+    <div class="grid-item">
+      <h3>Accesibilidad</h3>
+      <ul>
+        <li>Reducción de destellos</li>
+        <li>Reducción de movimiento</li>
+        <li>HUD de alto contraste</li>
+        <li>Intensidad de sacudida configurable</li>
+        <li>Silencio accesible con tecla M</li>
+        <li>Sin dependencia solo del color</li>
+      </ul>
+    </div>
+    <div class="grid-item">
+      <h3>Plataformas</h3>
+      <ul>
+        <li>Desktop: Chrome, Firefox, Edge, Safari</li>
+        <li>Móvil: joystick virtual + botones</li>
+        <li>Gamepad: Xbox, PlayStation, genéricos</li>
+        <li>Input unificado: todo simultaneo</li>
+        <li>Safe-area para notches</li>
+        <li>Responsive (960x540 base)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer">Chrono Defender — Presentación Hackathon</div>
+</div>
+
+<!-- SLIDE 9: STACK TECNOLÓGICO -->
+<div class="slide">
+  <h2>Stack Tecnológico</h2>
+  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:20px; max-width:800px;">
+    <span class="tag">TypeScript 5.9</span>
+    <span class="tag">Phaser 3.90</span>
+    <span class="tag">Vite 6.4</span>
+    <span class="tag">Web Audio API</span>
+    <span class="tag">Vitest 4.1</span>
+    <span class="tag">Playwright 1.61</span>
+    <span class="tag">ESLint 10</span>
+    <span class="tag">Prettier 3.9</span>
+    <span class="tag">GitHub Actions</span>
+    <span class="tag">GitHub Pages</span>
+    <span class="tag">localStorage</span>
+    <span class="tag">Gamepad API</span>
+    <span class="tag">Touch Events</span>
+    <span class="tag">Node 20</span>
+  </div>
+  <ul style="margin-top:40px;">
+    <li><span class="highlight">Zero backend</span> — aplicación 100% estática</li>
+    <li><span class="highlight">Zero assets externos</span> — todo procedural</li>
+    <li><span class="highlight">Zero secretos</span> — nada sensible en el repositorio</li>
+    <li><span class="highlight">Reproducible</span> — <code>npm ci && npm run build</code> desde cualquier máquina</li>
+    <li><span class="highlight">MIT License</span> — código abierto y libre</li>
+  </ul>
+  <div class="footer">Chrono Defender — Presentación Hackathon</div>
+</div>
+
+<!-- SLIDE 10: CIERRE -->
+<div class="slide">
+  <h1>CHRONO DEFENDER</h1>
+  <p class="subtitle">Un juego arcade completo, testeado y desplegado — sin assets externos</p>
+  <div style="margin-top:40px; text-align:center;">
+    <p><span class="highlight">Jugar Ahora:</span></p>
+    <p class="url">https://robinsonalexanderquiroz-droid.github.io/chrono-defender/</p>
+    <br>
+    <p><span class="highlight">Código Fuente:</span></p>
+    <p class="url">https://github.com/robinsonalexanderquiroz-droid/chrono-defender</p>
+  </div>
+  <div style="margin-top:50px; text-align:center;">
+    <p style="color:#ffcc00; font-size:1.3em;">¡Gracias!</p>
+  </div>
+  <div class="footer">Robinson Alexander Quiroz — Hackathon 2026</div>
+</div>
+
+</body>
+</html>
