@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chrono Defender - Presentación Hackathon</title>
+<title>Chrono Defender — Presentación Hackathon Kiro</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0a1a; color: #ffffff; }
@@ -14,12 +14,15 @@
   h3 { font-size: 1.4em; color: #ffcc00; margin-bottom: 15px; }
   p { font-size: 1.2em; line-height: 1.7; color: #cccccc; text-align: center; max-width: 900px; }
   .subtitle { font-size: 1.5em; color: #88aacc; margin-bottom: 40px; text-align: center; }
+  .kiro-badge { background: linear-gradient(135deg, #6366f1, #8b5cf6); padding: 8px 20px; border-radius: 20px; font-size: 0.95em; color: white; display: inline-block; margin-top: 15px; }
   ul { list-style: none; font-size: 1.15em; line-height: 2; max-width: 850px; }
   ul li { padding-left: 30px; position: relative; color: #dddddd; }
   ul li::before { content: '▸'; position: absolute; left: 0; color: #00ffff; font-weight: bold; }
   .highlight { color: #00ffff; font-weight: bold; }
   .accent { color: #ffcc00; font-weight: bold; }
+  .kiro-color { color: #a78bfa; font-weight: bold; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 950px; width: 100%; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; max-width: 950px; width: 100%; }
   .grid-item { background: rgba(0,255,255,0.05); border: 1px solid rgba(0,255,255,0.2); border-radius: 12px; padding: 25px; }
   .grid-item h3 { text-align: center; }
   .grid-item ul { font-size: 1em; }
@@ -27,11 +30,15 @@
   .stat { text-align: center; }
   .stat-number { font-size: 3em; color: #00ffff; font-weight: bold; }
   .stat-label { font-size: 0.95em; color: #888888; margin-top: 5px; }
+  .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px 40px; max-width: 800px; font-size: 1.1em; }
+  .check-grid span { color: #dddddd; }
+  .check-grid span::before { content: '✓ '; color: #00ff88; font-weight: bold; }
   .arch-box { background: rgba(0,100,200,0.1); border: 1px solid rgba(0,255,255,0.3); border-radius: 10px; padding: 20px 30px; margin: 10px 0; width: 100%; max-width: 800px; }
-  .arch-box code { color: #00ffcc; font-family: 'Fira Code', monospace; font-size: 0.95em; }
+  .arch-box code { color: #00ffcc; font-family: 'Fira Code', monospace; font-size: 0.9em; line-height: 1.6; }
   .footer { position: absolute; bottom: 20px; font-size: 0.85em; color: #555555; }
   .tag { display: inline-block; background: rgba(0,255,255,0.15); border: 1px solid #00ffff; border-radius: 20px; padding: 5px 15px; margin: 5px; font-size: 0.9em; color: #00ffff; }
   .url { color: #00ccff; font-size: 1.1em; margin-top: 20px; }
+  .quote { font-style: italic; color: #aaaacc; border-left: 3px solid #6366f1; padding-left: 20px; text-align: left; max-width: 700px; margin: 20px auto; }
   @media print { .slide { min-height: 100vh; } body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
 </style>
 </head>
@@ -40,259 +47,300 @@
 <!-- SLIDE 1: PORTADA -->
 <div class="slide">
   <h1>CHRONO DEFENDER</h1>
-  <p class="subtitle">Un Arcade Shooter completo construido desde cero en el navegador</p>
-  <p>Phaser 3 &bull; TypeScript &bull; Web Audio API &bull; Zero Assets Externos</p>
-  <div class="stat-row" style="margin-top:50px;">
-    <div class="stat"><div class="stat-number">0</div><div class="stat-label">Archivos de arte externos</div></div>
-    <div class="stat"><div class="stat-number">0</div><div class="stat-label">Archivos de audio</div></div>
-    <div class="stat"><div class="stat-number">0</div><div class="stat-label">Backend requerido</div></div>
+  <p class="subtitle">El videojuego que siempre quise crear — de la idea al producto con Kiro</p>
+  <p>Un arcade shooter horizontal completo, jugable y desplegado públicamente.<br>Construido desde cero con desarrollo asistido por IA.</p>
+  <div class="kiro-badge">Desarrollado con Kiro — AI-Powered IDE</div>
+  <div class="stat-row" style="margin-top:40px;">
+    <div class="stat"><div class="stat-number">0</div><div class="stat-label">Assets externos</div></div>
+    <div class="stat"><div class="stat-number">0</div><div class="stat-label">Backend</div></div>
+    <div class="stat"><div class="stat-number">100%</div><div class="stat-label">Jugable ya</div></div>
   </div>
-  <p class="url">https://robinsonalexanderquiroz-droid.github.io/chrono-defender/</p>
-  <div class="footer">Hackathon 2026 — Robinson Alexander Quiroz</div>
+  <p class="url" style="margin-top:30px;">▶ https://robinsonalexanderquiroz-droid.github.io/chrono-defender/</p>
+  <div class="footer">Hackathon Kiro 2026 — Robinson Alexander Quiroz</div>
 </div>
 
-<!-- SLIDE 2: PROBLEMA Y SOLUCIÓN -->
+<!-- SLIDE 2: EL RETO DEL HACKATHON -->
 <div class="slide">
-  <h2>El Desafío</h2>
-  <p style="margin-bottom:40px;">Crear un juego arcade completo, jugable, desplegado y testeado — sin dependencias externas de arte o sonido, usando exclusivamente tecnologías web modernas.</p>
-  <h3>La Solución: Chrono Defender</h3>
-  <ul>
-    <li>Juego de disparos horizontal con progresión infinita de oleadas</li>
-    <li>Todo el arte generado proceduralmente con Phaser Graphics</li>
-    <li>Todo el audio sintetizado en tiempo real con Web Audio API</li>
-    <li>Persistencia completa en localStorage sin servidor</li>
-    <li>Soporte multi-plataforma: teclado, gamepad y táctil</li>
-    <li>Desplegado automáticamente en GitHub Pages con CI/CD</li>
-  </ul>
-  <div class="footer">Chrono Defender — Presentación Hackathon</div>
+  <h2>El Reto del Hackathon</h2>
+  <div class="quote">
+    "Desarrolla el videojuego que siempre quisiste crear. Combina lógica, matemáticas, gráficos, audio, teoría de juegos, y mucho más con la ayuda de Kiro."
+  </div>
+  <h3 style="margin-top:40px; text-align:center;">Requisitos Evaluados</h3>
+  <div class="check-grid" style="margin-top:20px;">
+    <span>Ciclo completo del juego</span>
+    <span>Lógica y controles</span>
+    <span>Físicas y colisiones</span>
+    <span>Sistema de puntaje</span>
+    <span>Estados inicio/juego/fin</span>
+    <span>Publicado y jugable</span>
+    <span>Creatividad de la propuesta</span>
+    <span>Mecánicas simples pero divertidas</span>
+  </div>
+  <p style="margin-top:40px;"><span class="highlight">Chrono Defender cumple todos.</span> Y va mucho más allá.</p>
+  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
 </div>
 
-<!-- SLIDE 3: POR QUÉ DEBERÍA GANAR -->
+<!-- SLIDE 3: CÓMO KIRO ACELERÓ EL DESARROLLO -->
 <div class="slide">
-  <h2>¿Por Qué Chrono Defender Debería Ganar?</h2>
+  <h2>Kiro: De la Idea al Producto en Tiempo Récord</h2>
+  <p style="margin-bottom:30px;">El desarrollo asistido por IA de Kiro permitió construir un juego completo con la profundidad de un proyecto de meses — en el tiempo de un hackathon.</p>
   <div class="grid">
     <div class="grid-item">
-      <h3>Complejidad Técnica</h3>
+      <h3>Lo que Kiro aportó</h3>
       <ul>
-        <li>13 managers singleton especializados</li>
-        <li>TypeScript estricto (zero <code>any</code>)</li>
-        <li>Síntesis de audio procedural</li>
-        <li>5 patrones de movimiento de IA</li>
-        <li>Sistema de dificultad adaptativa</li>
+        <li>Arquitectura modular desde el día 1</li>
+        <li>13 managers especializados generados</li>
+        <li>Audio procedural completo (sin archivos)</li>
+        <li>90 tests automatizados</li>
+        <li>CI/CD configurado y funcionando</li>
+        <li>Documentación bilingüe</li>
       </ul>
     </div>
     <div class="grid-item">
-      <h3>Producto Completo</h3>
+      <h3>Lo que yo diseñé</h3>
       <ul>
-        <li>Jugable inmediatamente en el navegador</li>
-        <li>20 logros con progreso persistente</li>
-        <li>Tabla de clasificación top 10</li>
-        <li>Pantalla de opciones interactiva</li>
-        <li>Soporte de accesibilidad</li>
-      </ul>
-    </div>
-    <div class="grid-item">
-      <h3>Calidad de Ingeniería</h3>
-      <ul>
-        <li>64 tests unitarios</li>
-        <li>26 tests end-to-end</li>
-        <li>CI/CD con GitHub Actions</li>
-        <li>0 vulnerabilidades en auditoría</li>
-        <li>Código formateado y lintado</li>
-      </ul>
-    </div>
-    <div class="grid-item">
-      <h3>Innovación</h3>
-      <ul>
-        <li>Sin archivos de arte ni audio</li>
-        <li>Configuración declarativa de gameplay</li>
-        <li>Input unificado (3 fuentes)</li>
-        <li>Migración automática de saves</li>
-        <li>Gamepad con zonas muertas</li>
+        <li>Concepto y narrativa del juego</li>
+        <li>Mecánicas de gameplay</li>
+        <li>Balance de dificultad</li>
+        <li>Sistema de progresión</li>
+        <li>Decisiones de UX</li>
+        <li>Dirección creativa completa</li>
       </ul>
     </div>
   </div>
-  <div class="footer">Chrono Defender — Presentación Hackathon</div>
+  <p style="margin-top:30px;"><span class="kiro-color">Kiro</span> no reemplaza la creatividad del desarrollador — la <span class="accent">amplifica</span>.</p>
+  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
 </div>
 
-<!-- SLIDE 4: ARQUITECTURA -->
+<!-- SLIDE 4: CICLO COMPLETO DEL JUEGO -->
 <div class="slide">
-  <h2>Arquitectura del Sistema</h2>
+  <h2>Ciclo Completo del Juego</h2>
+  <p style="margin-bottom:30px;">Cada requisito del hackathon implementado y verificado:</p>
+  <div class="grid">
+    <div class="grid-item">
+      <h3>Lógica y Gameplay</h3>
+      <ul>
+        <li>5 tipos de enemigos con IA única</li>
+        <li>6 armas con mecánicas distintas</li>
+        <li>8 power-ups con efectos temporales</li>
+        <li>Sistema de oleadas progresivas</li>
+        <li>Mini-jefe cada 5 oleadas</li>
+        <li>Jefe final con fases</li>
+      </ul>
+    </div>
+    <div class="grid-item">
+      <h3>Controles y Físicas</h3>
+      <ul>
+        <li>Teclado: WASD + Espacio + teclas</li>
+        <li>Gamepad: Xbox/PS con analog</li>
+        <li>Táctil: joystick virtual + botones</li>
+        <li>Colisiones con Arcade Physics</li>
+        <li>Detección de overlap por grupo</li>
+        <li>Input unificado (3 fuentes a la vez)</li>
+      </ul>
+    </div>
+    <div class="grid-item">
+      <h3>Puntaje y Progresión</h3>
+      <ul>
+        <li>Combo multiplier hasta 4x</li>
+        <li>Popups flotantes de score</li>
+        <li>Top 10 leaderboard persistente</li>
+        <li>20 logros con progreso</li>
+        <li>Estadísticas de sesión</li>
+        <li>High score entre sesiones</li>
+      </ul>
+    </div>
+    <div class="grid-item">
+      <h3>Estados del Juego</h3>
+      <ul>
+        <li>Menú principal navegable</li>
+        <li>Gameplay activo</li>
+        <li>Pausa con overlay</li>
+        <li>Game Over con estadísticas</li>
+        <li>Victoria con fanfarria</li>
+        <li>Quit limpio al menú</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
+</div>
+
+<!-- SLIDE 5: ARQUITECTURA -->
+<div class="slide">
+  <h2>Arquitectura Modular</h2>
+  <p style="margin-bottom:20px;">13 managers singleton con responsabilidades claras y separadas:</p>
   <div class="arch-box">
     <code>
-src/<br>
-├── config/gameplay.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Configuración declarativa de todo el juego<br>
-├── scenes/<br>
-│&nbsp;&nbsp; ├── MenuScene.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Menú navegable con submenús<br>
-│&nbsp;&nbsp; ├── PrototypeScene.ts &nbsp;&nbsp;&nbsp;&nbsp;← Loop principal de gameplay<br>
-│&nbsp;&nbsp; ├── PauseScene.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Overlay de pausa con quit<br>
-│&nbsp;&nbsp; └── OptionsScene.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← 16+ opciones configurables<br>
-├── systems/<br>
-│&nbsp;&nbsp; ├── AudioManager.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← 15+ sonidos sintetizados<br>
-│&nbsp;&nbsp; ├── EnemyManager.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← 5 tipos, 5 patrones de IA<br>
-│&nbsp;&nbsp; ├── WeaponManager.ts &nbsp;&nbsp;&nbsp;&nbsp;← 6 armas con spread/piercing<br>
-│&nbsp;&nbsp; ├── ScoreManager.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Combos hasta 4x multiplicador<br>
-│&nbsp;&nbsp; ├── WaveManager.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Oleadas + mini-jefes + jefe final<br>
-│&nbsp;&nbsp; ├── DifficultyManager.ts &nbsp;← Escalado adaptativo por oleada<br>
-│&nbsp;&nbsp; ├── SaveManager.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Schema v4 + migración automática<br>
-│&nbsp;&nbsp; ├── AchievementManager.ts ← 20 logros event-driven<br>
-│&nbsp;&nbsp; ├── InputManager.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Teclado + Gamepad + Táctil<br>
-│&nbsp;&nbsp; ├── GamepadManager.ts &nbsp;&nbsp;&nbsp;← Dead zones + analog + edge detect<br>
-│&nbsp;&nbsp; ├── TouchManager.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Joystick virtual multi-touch<br>
-│&nbsp;&nbsp; └── SettingsManager.ts &nbsp;&nbsp;&nbsp;← Get/Set tipado con persistencia<br>
-└── ui/<br>
-&nbsp;&nbsp;&nbsp; ├── TouchOverlay.ts &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Controles visibles en móvil<br>
-&nbsp;&nbsp;&nbsp; ├── AchievementNotification.ts ← Toasts animados<br>
-&nbsp;&nbsp;&nbsp; └── WeaponSwitcher.ts &nbsp;&nbsp;&nbsp;&nbsp;← Cambio de arma con teclas 1-6<br>
+src/systems/ — El cerebro del juego<br><br>
+AudioManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Sintetiza 15+ sonidos y 5 temas musicales<br>
+EnemyManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ 5 tipos de enemigos, 5 patrones de IA<br>
+WeaponManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ 6 armas: disperso, perforante, plasma...<br>
+PowerUpManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ 8 power-ups con drops ponderados<br>
+WaveManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Oleadas + mini-jefes + jefe final<br>
+ScoreManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Combos, multiplicadores, popups<br>
+DifficultyManager &nbsp;&nbsp;→ Escalado adaptativo por oleada<br>
+SaveManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Schema v4 + migración automática<br>
+AchievementManager &nbsp;→ 20 logros event-driven<br>
+InputManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Unifica teclado + gamepad + táctil<br>
+GamepadManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Dead zones + analog + edge detection<br>
+TouchManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Joystick virtual multi-touch<br>
+SettingsManager &nbsp;&nbsp;&nbsp;&nbsp;→ 16 opciones con persistencia<br>
     </code>
   </div>
-  <div class="footer">Chrono Defender — Presentación Hackathon</div>
+  <p style="margin-top:15px;">Configuración 100% declarativa en <code style="color:#00ffcc;">gameplay.ts</code> — sin números mágicos.</p>
+  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
 </div>
 
-<!-- SLIDE 5: AUDIO PROCEDURAL -->
+<!-- SLIDE 6: AUDIO Y GRÁFICOS PROCEDURALES -->
 <div class="slide">
-  <h2>Audio 100% Procedural</h2>
-  <p style="margin-bottom:30px;">Ningún archivo de audio. Todo sintetizado en tiempo real con la Web Audio API.</p>
+  <h2>Todo Procedural: Cero Assets</h2>
+  <p style="margin-bottom:30px;">La propuesta más creativa: un juego completo sin <em>ningún</em> archivo de arte ni audio.</p>
   <div class="grid">
     <div class="grid-item">
-      <h3>5 Temas Musicales</h3>
+      <h3>Audio (Web Audio API)</h3>
       <ul>
-        <li>Menú: pad ambiental con filtro</li>
-        <li>Gameplay: bajo pulsante + arpegio</li>
-        <li>Jefe: distorsión + stabs disonantes</li>
-        <li>Victoria: fanfarria triunfante</li>
-        <li>Game Over: melodía descendente</li>
+        <li>5 temas musicales sintetizados</li>
+        <li>15+ efectos de sonido</li>
+        <li>Osciladores, ruido, filtros</li>
+        <li>Envelopes de amplitud</li>
+        <li>Fade-out en transiciones</li>
+        <li>Max 12 nodos simultáneos</li>
       </ul>
     </div>
     <div class="grid-item">
-      <h3>15+ Efectos de Sonido</h3>
+      <h3>Gráficos (Phaser Graphics)</h3>
       <ul>
-        <li>Láser: barrido de frecuencia</li>
-        <li>Explosión: ráfaga de ruido</li>
-        <li>Pickup: arpegio ascendente</li>
-        <li>Impacto: onda cuadrada grave</li>
-        <li>UI: tonos de dos notas</li>
+        <li>Nave del jugador: triángulos + glow</li>
+        <li>5 sprites de enemigos únicos</li>
+        <li>Jefe con armadura y núcleo</li>
+        <li>Partículas de explosión</li>
+        <li>Propulsores con trail</li>
+        <li>Starfield parallax multicapa</li>
       </ul>
     </div>
   </div>
-  <p style="margin-top:30px;">Máximo 12 nodos de audio simultáneos para prevenir clipping.<br>Degradación elegante si AudioContext no está disponible.</p>
-  <div class="footer">Chrono Defender — Presentación Hackathon</div>
+  <p style="margin-top:30px;">Esto demuestra dominio de <span class="highlight">matemáticas</span>, <span class="highlight">síntesis de señal</span> y <span class="highlight">gráficos por computadora</span> — todo desde código.</p>
+  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
 </div>
 
-<!-- SLIDE 6: GAMEPLAY Y CONTENIDO -->
+<!-- SLIDE 7: MECÁNICAS SIMPLES PERO DIVERTIDAS -->
 <div class="slide">
-  <h2>Contenido del Juego</h2>
-  <div class="stat-row">
-    <div class="stat"><div class="stat-number">5</div><div class="stat-label">Tipos de Enemigos</div></div>
-    <div class="stat"><div class="stat-number">6</div><div class="stat-label">Armas</div></div>
-    <div class="stat"><div class="stat-number">8</div><div class="stat-label">Power-Ups</div></div>
-    <div class="stat"><div class="stat-number">20</div><div class="stat-label">Logros</div></div>
-    <div class="stat"><div class="stat-number">16</div><div class="stat-label">Opciones</div></div>
+  <h2>Mecánicas Simples, Diversión Real</h2>
+  <p style="margin-bottom:30px;">El tip del hackathon: apostar por mecánicas simples pero divertidas.</p>
+  <div class="grid-3">
+    <div class="grid-item">
+      <h3>Dispara</h3>
+      <p style="font-size:0.95em; text-align:left; color:#aaa;">Mantén Espacio. Cambia de arma. Apunta bien.</p>
+    </div>
+    <div class="grid-item">
+      <h3>Esquiva</h3>
+      <p style="font-size:0.95em; text-align:left; color:#aaa;">5 patrones de enemigos. Proyectiles que esquivar. Oleadas crecientes.</p>
+    </div>
+    <div class="grid-item">
+      <h3>Progresa</h3>
+      <p style="font-size:0.95em; text-align:left; color:#aaa;">Combos x4. Mejoras. Power-ups. Logros que desbloquear.</p>
+    </div>
   </div>
   <ul style="margin-top:40px;">
-    <li><span class="highlight">Enemigos:</span> Scout, Interceptor, Heavy, Bomber, Sniper — cada uno con patrón de IA único</li>
-    <li><span class="highlight">Armas:</span> Láser, Disperso, Triple, Rápido, Perforante, Plasma — cambio con teclas 1-6</li>
-    <li><span class="highlight">Dificultad:</span> HP +10%/oleada, Velocidad +5%/oleada, Spawn -5%/oleada (con caps)</li>
-    <li><span class="highlight">Jefes:</span> Mini-jefe cada 5 oleadas + Jefe final (Guardián de la Época)</li>
-    <li><span class="highlight">Combos:</span> Encadena eliminaciones en 2s para multiplicador hasta 4x</li>
-    <li><span class="highlight">Persistencia:</span> High scores, logros, estadísticas, configuraciones — todo en localStorage</li>
+    <li><span class="accent">Loop adictivo:</span> Dispara → Encadena combos → Sube multiplicador → Colecta mejoras → Sobrevive más</li>
+    <li><span class="accent">Rejugabilidad:</span> Dificultad adaptativa + 20 logros + leaderboard = motivación para volver</li>
+    <li><span class="accent">Accesible:</span> Se aprende en 10 segundos, se domina en horas</li>
+    <li><span class="accent">Satisfactorio:</span> Sacudida de cámara, flash de daño, explosiones, sonido de combo</li>
   </ul>
-  <div class="footer">Chrono Defender — Presentación Hackathon</div>
+  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
 </div>
 
-<!-- SLIDE 7: TESTING Y CI/CD -->
+<!-- SLIDE 8: PUBLICACIÓN Y TESTING -->
 <div class="slide">
-  <h2>Testing y Calidad</h2>
+  <h2>Publicado y Verificado</h2>
   <div class="stat-row">
     <div class="stat"><div class="stat-number">64</div><div class="stat-label">Tests Unitarios</div></div>
     <div class="stat"><div class="stat-number">26</div><div class="stat-label">Tests E2E</div></div>
     <div class="stat"><div class="stat-number">0</div><div class="stat-label">Vulnerabilidades</div></div>
-    <div class="stat"><div class="stat-number">0</div><div class="stat-label">Errores de Lint</div></div>
+    <div class="stat"><div class="stat-number">∞</div><div class="stat-label">Rejugabilidad</div></div>
   </div>
   <ul style="margin-top:40px;">
-    <li><span class="accent">Vitest:</span> SaveManager, AchievementManager, GamepadManager, DifficultyManager, ScoreManager, SettingsManager</li>
-    <li><span class="accent">Playwright:</span> Navegación de menú, pausa/resume, quit, mute, gameplay completo, opciones</li>
-    <li><span class="accent">CI/CD:</span> typecheck → lint → format → test → build → e2e → audit en cada push</li>
-    <li><span class="accent">Despliegue:</span> GitHub Pages automático tras CI exitoso</li>
-    <li><span class="accent">Seguridad:</span> Dependencias pinneadas, npm audit en CI, sin secretos</li>
+    <li><span class="highlight">Despliegue:</span> GitHub Pages — automático en cada push via GitHub Actions</li>
+    <li><span class="highlight">CI Pipeline:</span> typecheck → lint → format → unit tests → build → e2e → audit</li>
+    <li><span class="highlight">Persistencia:</span> localStorage — high scores, logros, opciones, estadísticas</li>
+    <li><span class="highlight">Seguridad:</span> Dependencias pinneadas, 0 vulnerabilidades, sin secretos</li>
+    <li><span class="highlight">Accesibilidad:</span> Reducción de destellos, alto contraste, silencio con M, soporte multi-input</li>
   </ul>
-  <div class="footer">Chrono Defender — Presentación Hackathon</div>
+  <p style="margin-top:30px;">Cualquier persona puede jugarlo <span class="accent">ahora mismo</span> desde cualquier navegador moderno.</p>
+  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
 </div>
 
-<!-- SLIDE 8: ACCESIBILIDAD Y MULTI-PLATAFORMA -->
+<!-- SLIDE 9: POR QUÉ DEBERÍA GANAR -->
 <div class="slide">
-  <h2>Accesibilidad y Multi-Plataforma</h2>
+  <h2>¿Por Qué Chrono Defender Debería Ganar?</h2>
   <div class="grid">
     <div class="grid-item">
-      <h3>Accesibilidad</h3>
+      <h3>Cumple Todo lo Pedido</h3>
       <ul>
-        <li>Reducción de destellos</li>
-        <li>Reducción de movimiento</li>
-        <li>HUD de alto contraste</li>
-        <li>Intensidad de sacudida configurable</li>
-        <li>Silencio accesible con tecla M</li>
-        <li>Sin dependencia solo del color</li>
+        <li>Ciclo completo de juego ✓</li>
+        <li>Lógica + controles + físicas ✓</li>
+        <li>Detección de colisiones ✓</li>
+        <li>Sistema de puntaje ✓</li>
+        <li>Estados inicio/juego/fin ✓</li>
+        <li>Publicado y jugable ✓</li>
       </ul>
     </div>
     <div class="grid-item">
-      <h3>Plataformas</h3>
+      <h3>Va Más Allá</h3>
       <ul>
-        <li>Desktop: Chrome, Firefox, Edge, Safari</li>
-        <li>Móvil: joystick virtual + botones</li>
-        <li>Gamepad: Xbox, PlayStation, genéricos</li>
-        <li>Input unificado: todo simultaneo</li>
-        <li>Safe-area para notches</li>
-        <li>Responsive (960x540 base)</li>
+        <li>20 logros con persistencia</li>
+        <li>Leaderboard top 10</li>
+        <li>Soporte gamepad + móvil</li>
+        <li>Pantalla de opciones completa</li>
+        <li>90 tests automatizados</li>
+        <li>Audio y arte procedural</li>
+      </ul>
+    </div>
+    <div class="grid-item">
+      <h3>Demuestra Kiro</h3>
+      <ul>
+        <li>Idea → Producto completo</li>
+        <li>Arquitectura profesional</li>
+        <li>13 sistemas modulares</li>
+        <li>Testing exhaustivo</li>
+        <li>CI/CD funcional</li>
+        <li>Documentación bilingüe</li>
+      </ul>
+    </div>
+    <div class="grid-item">
+      <h3>Creatividad</h3>
+      <ul>
+        <li>Cero assets = pura ingeniería</li>
+        <li>Síntesis de audio original</li>
+        <li>Mecánicas adictivas</li>
+        <li>Dificultad que se adapta</li>
+        <li>Narrativa sci-fi coherente</li>
+        <li>Experiencia completa y pulida</li>
       </ul>
     </div>
   </div>
-  <div class="footer">Chrono Defender — Presentación Hackathon</div>
-</div>
-
-<!-- SLIDE 9: STACK TECNOLÓGICO -->
-<div class="slide">
-  <h2>Stack Tecnológico</h2>
-  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:20px; max-width:800px;">
-    <span class="tag">TypeScript 5.9</span>
-    <span class="tag">Phaser 3.90</span>
-    <span class="tag">Vite 6.4</span>
-    <span class="tag">Web Audio API</span>
-    <span class="tag">Vitest 4.1</span>
-    <span class="tag">Playwright 1.61</span>
-    <span class="tag">ESLint 10</span>
-    <span class="tag">Prettier 3.9</span>
-    <span class="tag">GitHub Actions</span>
-    <span class="tag">GitHub Pages</span>
-    <span class="tag">localStorage</span>
-    <span class="tag">Gamepad API</span>
-    <span class="tag">Touch Events</span>
-    <span class="tag">Node 20</span>
-  </div>
-  <ul style="margin-top:40px;">
-    <li><span class="highlight">Zero backend</span> — aplicación 100% estática</li>
-    <li><span class="highlight">Zero assets externos</span> — todo procedural</li>
-    <li><span class="highlight">Zero secretos</span> — nada sensible en el repositorio</li>
-    <li><span class="highlight">Reproducible</span> — <code>npm ci && npm run build</code> desde cualquier máquina</li>
-    <li><span class="highlight">MIT License</span> — código abierto y libre</li>
-  </ul>
-  <div class="footer">Chrono Defender — Presentación Hackathon</div>
+  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
 </div>
 
 <!-- SLIDE 10: CIERRE -->
 <div class="slide">
   <h1>CHRONO DEFENDER</h1>
-  <p class="subtitle">Un juego arcade completo, testeado y desplegado — sin assets externos</p>
-  <div style="margin-top:40px; text-align:center;">
-    <p><span class="highlight">Jugar Ahora:</span></p>
+  <p class="subtitle">Un videojuego completo. Cero assets externos. Desarrollo asistido por Kiro.</p>
+  <div style="margin-top:30px; text-align:center;">
+    <p><span class="highlight">▶ Jugar Ahora:</span></p>
     <p class="url">https://robinsonalexanderquiroz-droid.github.io/chrono-defender/</p>
     <br>
-    <p><span class="highlight">Código Fuente:</span></p>
+    <p><span class="highlight">📂 Código Fuente:</span></p>
     <p class="url">https://github.com/robinsonalexanderquiroz-droid/chrono-defender</p>
   </div>
-  <div style="margin-top:50px; text-align:center;">
-    <p style="color:#ffcc00; font-size:1.3em;">¡Gracias!</p>
+  <div style="margin-top:40px; text-align:center;">
+    <div class="kiro-badge" style="font-size:1.1em;">Construido con Kiro</div>
   </div>
-  <div class="footer">Robinson Alexander Quiroz — Hackathon 2026</div>
+  <div style="margin-top:40px; text-align:center;">
+    <p style="color:#ffcc00; font-size:1.4em;">¡Gracias!</p>
+    <p style="color:#888; font-size:0.95em; margin-top:10px;">Robinson Alexander Quiroz</p>
+  </div>
+  <div class="footer">Hackathon Kiro 2026</div>
 </div>
 
 </body>
