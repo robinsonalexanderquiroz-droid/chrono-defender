@@ -3,344 +3,392 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chrono Defender — Presentación Hackathon Kiro</title>
+<title>Chrono Defender — Hackathon IA Masivo AWS x Codigo Facilito</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0a0a1a; color: #ffffff; }
-  .slide { width: 100%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 80px; page-break-after: always; position: relative; }
-  .slide::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at center, #0d1a2f 0%, #0a0a1a 70%); z-index: -1; }
-  h1 { font-size: 3.2em; color: #00ffff; text-align: center; margin-bottom: 20px; text-shadow: 0 0 20px rgba(0,255,255,0.3); }
-  h2 { font-size: 2.2em; color: #00ffff; text-align: center; margin-bottom: 30px; }
-  h3 { font-size: 1.4em; color: #ffcc00; margin-bottom: 15px; }
-  p { font-size: 1.2em; line-height: 1.7; color: #cccccc; text-align: center; max-width: 900px; }
-  .subtitle { font-size: 1.5em; color: #88aacc; margin-bottom: 40px; text-align: center; }
-  .kiro-badge { background: linear-gradient(135deg, #6366f1, #8b5cf6); padding: 8px 20px; border-radius: 20px; font-size: 0.95em; color: white; display: inline-block; margin-top: 15px; }
-  ul { list-style: none; font-size: 1.15em; line-height: 2; max-width: 850px; }
-  ul li { padding-left: 30px; position: relative; color: #dddddd; }
-  ul li::before { content: '▸'; position: absolute; left: 0; color: #00ffff; font-weight: bold; }
-  .highlight { color: #00ffff; font-weight: bold; }
-  .accent { color: #ffcc00; font-weight: bold; }
-  .kiro-color { color: #a78bfa; font-weight: bold; }
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 950px; width: 100%; }
-  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; max-width: 950px; width: 100%; }
-  .grid-item { background: rgba(0,255,255,0.05); border: 1px solid rgba(0,255,255,0.2); border-radius: 12px; padding: 25px; }
-  .grid-item h3 { text-align: center; }
-  .grid-item ul { font-size: 1em; }
-  .stat-row { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px; margin-top: 30px; }
-  .stat { text-align: center; }
-  .stat-number { font-size: 3em; color: #00ffff; font-weight: bold; }
-  .stat-label { font-size: 0.95em; color: #888888; margin-top: 5px; }
-  .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px 40px; max-width: 800px; font-size: 1.1em; }
-  .check-grid span { color: #dddddd; }
-  .check-grid span::before { content: '✓ '; color: #00ff88; font-weight: bold; }
-  .arch-box { background: rgba(0,100,200,0.1); border: 1px solid rgba(0,255,255,0.3); border-radius: 10px; padding: 20px 30px; margin: 10px 0; width: 100%; max-width: 800px; }
-  .arch-box code { color: #00ffcc; font-family: 'Fira Code', monospace; font-size: 0.9em; line-height: 1.6; }
-  .footer { position: absolute; bottom: 20px; font-size: 0.85em; color: #555555; }
-  .tag { display: inline-block; background: rgba(0,255,255,0.15); border: 1px solid #00ffff; border-radius: 20px; padding: 5px 15px; margin: 5px; font-size: 0.9em; color: #00ffff; }
-  .url { color: #00ccff; font-size: 1.1em; margin-top: 20px; }
-  .quote { font-style: italic; color: #aaaacc; border-left: 3px solid #6366f1; padding-left: 20px; text-align: left; max-width: 700px; margin: 20px auto; }
-  @media print { .slide { min-height: 100vh; } body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#0a0a1a;color:#fff}
+.slide{width:100%;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:60px 80px;page-break-after:always;position:relative}
+.slide::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,#0d1a2f 0%,#0a0a1a 70%);z-index:-1}
+h1{font-size:3em;color:#00ffff;text-align:center;margin-bottom:20px;text-shadow:0 0 20px rgba(0,255,255,.3)}
+h2{font-size:2.1em;color:#00ffff;text-align:center;margin-bottom:30px}
+h3{font-size:1.3em;color:#ffcc00;margin-bottom:12px}
+p{font-size:1.15em;line-height:1.7;color:#ccc;text-align:center;max-width:900px}
+.sub{font-size:1.4em;color:#88aacc;margin-bottom:35px;text-align:center}
+.badge{background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:8px 20px;border-radius:20px;font-size:.95em;color:#fff;display:inline-block;margin:8px 4px}
+.badge-aws{background:linear-gradient(135deg,#ff9900,#ffb84d)}
+ul{list-style:none;font-size:1.1em;line-height:2;max-width:850px}
+ul li{padding-left:28px;position:relative;color:#ddd}
+ul li::before{content:'▸';position:absolute;left:0;color:#00ffff;font-weight:bold}
+.hi{color:#00ffff;font-weight:bold}
+.acc{color:#ffcc00;font-weight:bold}
+.kiro{color:#a78bfa;font-weight:bold}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:35px;max-width:950px;width:100%}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:25px;max-width:950px;width:100%}
+.box{background:rgba(0,255,255,.04);border:1px solid rgba(0,255,255,.2);border-radius:12px;padding:22px}
+.box h3{text-align:center}
+.box ul{font-size:.95em}
+.stats{display:flex;justify-content:space-around;flex-wrap:wrap;gap:25px;margin-top:25px}
+.stat{text-align:center}
+.stat b{font-size:2.8em;color:#00ffff;display:block}
+.stat span{font-size:.9em;color:#888}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:12px 40px;max-width:800px;font-size:1.05em}
+.checks span{color:#ddd}
+.checks span::before{content:'✓ ';color:#00ff88;font-weight:bold}
+.quote{font-style:italic;color:#aac;border-left:3px solid #6366f1;padding-left:20px;text-align:left;max-width:750px;margin:20px auto}
+.url{color:#00ccff;font-size:1.05em;margin-top:15px}
+.footer{position:absolute;bottom:18px;font-size:.8em;color:#555}
+.tag{display:inline-block;background:rgba(0,255,255,.12);border:1px solid #00ffff;border-radius:20px;padding:4px 14px;margin:4px;font-size:.85em;color:#00ffff}
+@media print{.slide{min-height:100vh}body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 </head>
 <body>
 
 <!-- SLIDE 1: PORTADA -->
 <div class="slide">
-  <h1>CHRONO DEFENDER</h1>
-  <p class="subtitle">El videojuego que siempre quise crear — de la idea al producto con Kiro</p>
-  <p>Un arcade shooter horizontal completo, jugable y desplegado públicamente.<br>Construido desde cero con desarrollo asistido por IA.</p>
-  <div class="kiro-badge">Desarrollado con Kiro — AI-Powered IDE</div>
-  <div class="stat-row" style="margin-top:40px;">
-    <div class="stat"><div class="stat-number">0</div><div class="stat-label">Assets externos</div></div>
-    <div class="stat"><div class="stat-number">0</div><div class="stat-label">Backend</div></div>
-    <div class="stat"><div class="stat-number">100%</div><div class="stat-label">Jugable ya</div></div>
-  </div>
-  <p class="url" style="margin-top:30px;">▶ https://robinsonalexanderquiroz-droid.github.io/chrono-defender/</p>
-  <div class="footer">Hackathon Kiro 2026 — Robinson Alexander Quiroz</div>
+<h1>CHRONO DEFENDER</h1>
+<p class="sub">Hackathon IA Masivo Online AWS — Codigo Facilito</p>
+<p>Un arcade shooter horizontal completo, original y jugable — construido en 7 dias con desarrollo asistido por IA.</p>
+<div style="margin-top:20px">
+<span class="badge">Desarrollado con Kiro</span>
+<span class="badge-aws">Desplegado en GitHub Pages</span>
+</div>
+<div class="stats" style="margin-top:40px">
+<div class="stat"><b>0</b><span>Assets externos</span></div>
+<div class="stat"><b>0</b><span>Backend</span></div>
+<div class="stat"><b>90</b><span>Tests automatizados</span></div>
+<div class="stat"><b>100%</b><span>Jugable ahora</span></div>
+</div>
+<p class="url" style="margin-top:25px">https://robinsonalexanderquiroz-droid.github.io/chrono-defender/</p>
+<div class="footer">Robinson Alexander Quiroz — Hackathon IA Masivo AWS x Codigo Facilito 2026</div>
 </div>
 
-<!-- SLIDE 2: EL RETO DEL HACKATHON -->
+<!-- SLIDE 2: EL RETO -->
 <div class="slide">
-  <h2>El Reto del Hackathon</h2>
-  <div class="quote">
-    "Desarrolla el videojuego que siempre quisiste crear. Combina lógica, matemáticas, gráficos, audio, teoría de juegos, y mucho más con la ayuda de Kiro."
-  </div>
-  <h3 style="margin-top:40px; text-align:center;">Requisitos Evaluados</h3>
-  <div class="check-grid" style="margin-top:20px;">
-    <span>Ciclo completo del juego</span>
-    <span>Lógica y controles</span>
-    <span>Físicas y colisiones</span>
-    <span>Sistema de puntaje</span>
-    <span>Estados inicio/juego/fin</span>
-    <span>Publicado y jugable</span>
-    <span>Creatividad de la propuesta</span>
-    <span>Mecánicas simples pero divertidas</span>
-  </div>
-  <p style="margin-top:40px;"><span class="highlight">Chrono Defender cumple todos.</span> Y va mucho más allá.</p>
-  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
+<h2>El Reto del Hackathon</h2>
+<div class="quote">"Desarrolla el videojuego que siempre quisiste crear. Combina logica, matematicas, graficos, audio, teoria de juegos, y mucho mas con la ayuda de Kiro."</div>
+<h3 style="margin-top:35px;text-align:center">Requisitos Cumplidos</h3>
+<div class="checks" style="margin-top:15px">
+<span>Ciclo completo del juego</span>
+<span>Logica y controles</span>
+<span>Fisicas basicas y colisiones</span>
+<span>Sistema de puntaje</span>
+<span>Estados inicio / juego / fin</span>
+<span>Publicado y jugable online</span>
+<span>Repositorio publico + README</span>
+<span>Video de presentacion</span>
+<span>Demo funcional en linea</span>
+<span>Trabajo original del equipo</span>
+</div>
+<p style="margin-top:35px"><span class="hi">Chrono Defender cumple cada uno.</span> Y va mucho mas alla.</p>
+<div class="footer">Chrono Defender — Hackathon IA Masivo AWS 2026</div>
 </div>
 
-<!-- SLIDE 3: CÓMO KIRO ACELERÓ EL DESARROLLO -->
+<!-- SLIDE 3: CRITERIOS DE EVALUACION -->
 <div class="slide">
-  <h2>Kiro: De la Idea al Producto en Tiempo Récord</h2>
-  <p style="margin-bottom:30px;">El desarrollo asistido por IA de Kiro permitió construir un juego completo con la profundidad de un proyecto de meses — en el tiempo de un hackathon.</p>
-  <div class="grid">
-    <div class="grid-item">
-      <h3>Lo que Kiro aportó</h3>
-      <ul>
-        <li>Arquitectura modular desde el día 1</li>
-        <li>13 managers especializados generados</li>
-        <li>Audio procedural completo (sin archivos)</li>
-        <li>90 tests automatizados</li>
-        <li>CI/CD configurado y funcionando</li>
-        <li>Documentación bilingüe</li>
-      </ul>
-    </div>
-    <div class="grid-item">
-      <h3>Lo que yo diseñé</h3>
-      <ul>
-        <li>Concepto y narrativa del juego</li>
-        <li>Mecánicas de gameplay</li>
-        <li>Balance de dificultad</li>
-        <li>Sistema de progresión</li>
-        <li>Decisiones de UX</li>
-        <li>Dirección creativa completa</li>
-      </ul>
-    </div>
-  </div>
-  <p style="margin-top:30px;"><span class="kiro-color">Kiro</span> no reemplaza la creatividad del desarrollador — la <span class="accent">amplifica</span>.</p>
-  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
+<h2>Alineado con los Criterios de Evaluacion</h2>
+<div class="grid">
+<div class="box">
+<h3>Game Design — 30%</h3>
+<ul>
+<li>5 tipos de enemigos con IA unica</li>
+<li>Dificultad adaptativa (desafiante pero lograble)</li>
+<li>Loop: dispara, encadena combos, mejora, sobrevive</li>
+<li>Mini-jefe cada 5 oleadas + jefe final</li>
+<li>Mecanicas simples, dominio profundo</li>
+</ul>
+</div>
+<div class="box">
+<h3>Innovacion — 30%</h3>
+<ul>
+<li>CERO archivos de arte o audio</li>
+<li>Todo generado proceduralmente por codigo</li>
+<li>Sintesis de audio con Web Audio API</li>
+<li>Input unificado: teclado + gamepad + tactil</li>
+<li>Configuracion 100% declarativa</li>
+</ul>
+</div>
+<div class="box">
+<h3>Software Funcional — 30%</h3>
+<ul>
+<li>Repositorio publico en GitHub + README</li>
+<li>Demo online funcional en GitHub Pages</li>
+<li>Video de presentacion (este video)</li>
+<li>64 tests unitarios + 26 tests E2E</li>
+<li>CI/CD con GitHub Actions</li>
+</ul>
+</div>
+<div class="box">
+<h3>Uso de Kiro + AWS — 10%</h3>
+<ul>
+<li>100% desarrollado con Kiro IDE</li>
+<li>Arquitectura generada con asistencia IA</li>
+<li>13 managers modulares creados con Kiro</li>
+<li>Tests generados y verificados con Kiro</li>
+<li>GitHub Pages para hosting publico</li>
+</ul>
+</div>
+</div>
+<div class="footer">Chrono Defender — Hackathon IA Masivo AWS 2026</div>
 </div>
 
-<!-- SLIDE 4: CICLO COMPLETO DEL JUEGO -->
+<!-- SLIDE 4: KIRO COMO COPILOTO -->
 <div class="slide">
-  <h2>Ciclo Completo del Juego</h2>
-  <p style="margin-bottom:30px;">Cada requisito del hackathon implementado y verificado:</p>
-  <div class="grid">
-    <div class="grid-item">
-      <h3>Lógica y Gameplay</h3>
-      <ul>
-        <li>5 tipos de enemigos con IA única</li>
-        <li>6 armas con mecánicas distintas</li>
-        <li>8 power-ups con efectos temporales</li>
-        <li>Sistema de oleadas progresivas</li>
-        <li>Mini-jefe cada 5 oleadas</li>
-        <li>Jefe final con fases</li>
-      </ul>
-    </div>
-    <div class="grid-item">
-      <h3>Controles y Físicas</h3>
-      <ul>
-        <li>Teclado: WASD + Espacio + teclas</li>
-        <li>Gamepad: Xbox/PS con analog</li>
-        <li>Táctil: joystick virtual + botones</li>
-        <li>Colisiones con Arcade Physics</li>
-        <li>Detección de overlap por grupo</li>
-        <li>Input unificado (3 fuentes a la vez)</li>
-      </ul>
-    </div>
-    <div class="grid-item">
-      <h3>Puntaje y Progresión</h3>
-      <ul>
-        <li>Combo multiplier hasta 4x</li>
-        <li>Popups flotantes de score</li>
-        <li>Top 10 leaderboard persistente</li>
-        <li>20 logros con progreso</li>
-        <li>Estadísticas de sesión</li>
-        <li>High score entre sesiones</li>
-      </ul>
-    </div>
-    <div class="grid-item">
-      <h3>Estados del Juego</h3>
-      <ul>
-        <li>Menú principal navegable</li>
-        <li>Gameplay activo</li>
-        <li>Pausa con overlay</li>
-        <li>Game Over con estadísticas</li>
-        <li>Victoria con fanfarria</li>
-        <li>Quit limpio al menú</li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
+<h2>Kiro: De la Idea al Producto en 7 Dias</h2>
+<p style="margin-bottom:25px">El desarrollo asistido por IA de <span class="kiro">Kiro</span> permitio construir un juego con la profundidad de meses — en una semana.</p>
+<div class="grid">
+<div class="box">
+<h3>Lo que Kiro aporto</h3>
+<ul>
+<li>Arquitectura modular desde el dia 1</li>
+<li>13 managers singleton generados</li>
+<li>AudioManager con sintesis procedural</li>
+<li>90 tests automatizados</li>
+<li>CI/CD configurado y desplegado</li>
+<li>Documentacion bilingue (EN/ES)</li>
+<li>Steering docs para consistencia</li>
+</ul>
+</div>
+<div class="box">
+<h3>Lo que yo disene</h3>
+<ul>
+<li>Concepto y narrativa sci-fi</li>
+<li>Mecanicas de gameplay</li>
+<li>Balance y curva de dificultad</li>
+<li>Sistema de progresion y logros</li>
+<li>Decisiones de UX y accesibilidad</li>
+<li>Direccion creativa completa</li>
+<li>Validacion y QA final</li>
+</ul>
+</div>
+</div>
+<p style="margin-top:25px"><span class="kiro">Kiro</span> no reemplaza la creatividad — la <span class="acc">amplifica exponencialmente</span>.</p>
+<div class="footer">Chrono Defender — Hackathon IA Masivo AWS 2026</div>
 </div>
 
-<!-- SLIDE 5: ARQUITECTURA -->
+<!-- SLIDE 5: CICLO COMPLETO -->
 <div class="slide">
-  <h2>Arquitectura Modular</h2>
-  <p style="margin-bottom:20px;">13 managers singleton con responsabilidades claras y separadas:</p>
-  <div class="arch-box">
-    <code>
-src/systems/ — El cerebro del juego<br><br>
-AudioManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Sintetiza 15+ sonidos y 5 temas musicales<br>
-EnemyManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ 5 tipos de enemigos, 5 patrones de IA<br>
-WeaponManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ 6 armas: disperso, perforante, plasma...<br>
-PowerUpManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ 8 power-ups con drops ponderados<br>
-WaveManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Oleadas + mini-jefes + jefe final<br>
-ScoreManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Combos, multiplicadores, popups<br>
-DifficultyManager &nbsp;&nbsp;→ Escalado adaptativo por oleada<br>
-SaveManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Schema v4 + migración automática<br>
-AchievementManager &nbsp;→ 20 logros event-driven<br>
-InputManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Unifica teclado + gamepad + táctil<br>
-GamepadManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Dead zones + analog + edge detection<br>
-TouchManager &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ Joystick virtual multi-touch<br>
-SettingsManager &nbsp;&nbsp;&nbsp;&nbsp;→ 16 opciones con persistencia<br>
-    </code>
-  </div>
-  <p style="margin-top:15px;">Configuración 100% declarativa en <code style="color:#00ffcc;">gameplay.ts</code> — sin números mágicos.</p>
-  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
+<h2>Ciclo Completo del Juego</h2>
+<div class="grid">
+<div class="box">
+<h3>Logica y Gameplay</h3>
+<ul>
+<li>5 tipos de enemigos con patrones de IA</li>
+<li>6 armas con mecanicas unicas</li>
+<li>8 power-ups con efectos temporales</li>
+<li>Oleadas progresivas con escalado</li>
+<li>Mini-jefe + jefe final con fases</li>
+<li>Combo multiplier hasta 4x</li>
+</ul>
+</div>
+<div class="box">
+<h3>Controles y Fisicas</h3>
+<ul>
+<li>Teclado: WASD + Espacio + 1-6</li>
+<li>Gamepad: Xbox/PS con analog</li>
+<li>Tactil: joystick virtual + botones</li>
+<li>Arcade Physics (colisiones)</li>
+<li>Deteccion de overlap por grupo</li>
+<li>Edge-detection para inputs</li>
+</ul>
+</div>
+<div class="box">
+<h3>Puntaje y Persistencia</h3>
+<ul>
+<li>Score con combo multiplier</li>
+<li>Top 10 leaderboard (localStorage)</li>
+<li>20 logros con progreso</li>
+<li>Estadisticas de sesion</li>
+<li>High score persistente</li>
+<li>Migracion automatica de saves</li>
+</ul>
+</div>
+<div class="box">
+<h3>Estados del Juego</h3>
+<ul>
+<li>Menu principal navegable</li>
+<li>Gameplay activo con HUD</li>
+<li>Pausa con overlay dedicado</li>
+<li>Game Over con stats finales</li>
+<li>Victoria con fanfarria</li>
+<li>Quit limpio al menu</li>
+</ul>
+</div>
+</div>
+<div class="footer">Chrono Defender — Hackathon IA Masivo AWS 2026</div>
 </div>
 
-<!-- SLIDE 6: AUDIO Y GRÁFICOS PROCEDURALES -->
+<!-- SLIDE 6: ARQUITECTURA -->
 <div class="slide">
-  <h2>Todo Procedural: Cero Assets</h2>
-  <p style="margin-bottom:30px;">La propuesta más creativa: un juego completo sin <em>ningún</em> archivo de arte ni audio.</p>
-  <div class="grid">
-    <div class="grid-item">
-      <h3>Audio (Web Audio API)</h3>
-      <ul>
-        <li>5 temas musicales sintetizados</li>
-        <li>15+ efectos de sonido</li>
-        <li>Osciladores, ruido, filtros</li>
-        <li>Envelopes de amplitud</li>
-        <li>Fade-out en transiciones</li>
-        <li>Max 12 nodos simultáneos</li>
-      </ul>
-    </div>
-    <div class="grid-item">
-      <h3>Gráficos (Phaser Graphics)</h3>
-      <ul>
-        <li>Nave del jugador: triángulos + glow</li>
-        <li>5 sprites de enemigos únicos</li>
-        <li>Jefe con armadura y núcleo</li>
-        <li>Partículas de explosión</li>
-        <li>Propulsores con trail</li>
-        <li>Starfield parallax multicapa</li>
-      </ul>
-    </div>
-  </div>
-  <p style="margin-top:30px;">Esto demuestra dominio de <span class="highlight">matemáticas</span>, <span class="highlight">síntesis de señal</span> y <span class="highlight">gráficos por computadora</span> — todo desde código.</p>
-  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
+<h2>Arquitectura Modular</h2>
+<p style="margin-bottom:15px">13 sistemas singleton con responsabilidades claras — zero acoplamiento:</p>
+<div style="background:rgba(0,100,200,.08);border:1px solid rgba(0,255,255,.25);border-radius:10px;padding:20px 30px;width:100%;max-width:820px">
+<code style="color:#00ffcc;font-family:monospace;font-size:.88em;line-height:1.7;display:block;white-space:pre">src/systems/
+  AudioManager.ts       → 15+ sonidos + 5 temas (Web Audio API)
+  EnemyManager.ts       → 5 tipos, 5 patrones de movimiento IA
+  WeaponManager.ts      → 6 armas: spread, piercing, plasma...
+  PowerUpManager.ts     → 8 power-ups, drops ponderados
+  WaveManager.ts        → Oleadas + mini-jefes + boss final
+  ScoreManager.ts       → Combos 4x + popups flotantes
+  DifficultyManager.ts  → HP/Speed/Spawn escalan por oleada
+  SaveManager.ts        → Schema v4 + migracion automatica
+  AchievementManager.ts → 20 logros event-driven
+  InputManager.ts       → Unifica teclado + gamepad + tactil
+  GamepadManager.ts     → Dead zones + analog + edge detect
+  TouchManager.ts       → Joystick virtual multi-touch
+  SettingsManager.ts    → 16 opciones con persistencia
+
+src/config/gameplay.ts  → TODA la config declarativa (zero magic numbers)</code>
+</div>
+<p style="margin-top:15px;font-size:1em">Cada parametro del juego es configurable sin tocar logica de gameplay.</p>
+<div class="footer">Chrono Defender — Hackathon IA Masivo AWS 2026</div>
 </div>
 
-<!-- SLIDE 7: MECÁNICAS SIMPLES PERO DIVERTIDAS -->
+<!-- SLIDE 7: INNOVACION - TODO PROCEDURAL -->
 <div class="slide">
-  <h2>Mecánicas Simples, Diversión Real</h2>
-  <p style="margin-bottom:30px;">El tip del hackathon: apostar por mecánicas simples pero divertidas.</p>
-  <div class="grid-3">
-    <div class="grid-item">
-      <h3>Dispara</h3>
-      <p style="font-size:0.95em; text-align:left; color:#aaa;">Mantén Espacio. Cambia de arma. Apunta bien.</p>
-    </div>
-    <div class="grid-item">
-      <h3>Esquiva</h3>
-      <p style="font-size:0.95em; text-align:left; color:#aaa;">5 patrones de enemigos. Proyectiles que esquivar. Oleadas crecientes.</p>
-    </div>
-    <div class="grid-item">
-      <h3>Progresa</h3>
-      <p style="font-size:0.95em; text-align:left; color:#aaa;">Combos x4. Mejoras. Power-ups. Logros que desbloquear.</p>
-    </div>
-  </div>
-  <ul style="margin-top:40px;">
-    <li><span class="accent">Loop adictivo:</span> Dispara → Encadena combos → Sube multiplicador → Colecta mejoras → Sobrevive más</li>
-    <li><span class="accent">Rejugabilidad:</span> Dificultad adaptativa + 20 logros + leaderboard = motivación para volver</li>
-    <li><span class="accent">Accesible:</span> Se aprende en 10 segundos, se domina en horas</li>
-    <li><span class="accent">Satisfactorio:</span> Sacudida de cámara, flash de daño, explosiones, sonido de combo</li>
-  </ul>
-  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
+<h2>Innovacion: Todo Procedural, Cero Assets</h2>
+<p style="margin-bottom:25px">La propuesta mas creativa: un juego completo sin <em>ningun</em> archivo de arte ni audio en el repositorio.</p>
+<div class="grid">
+<div class="box">
+<h3>Audio (Web Audio API)</h3>
+<ul>
+<li>5 temas musicales sintetizados</li>
+<li>15+ efectos de sonido</li>
+<li>Osciladores + ruido + filtros</li>
+<li>Envelopes de amplitud</li>
+<li>Transiciones con fade-out</li>
+<li>Max 12 nodos simultaneos</li>
+</ul>
+</div>
+<div class="box">
+<h3>Graficos (Phaser Graphics)</h3>
+<ul>
+<li>Nave: triangulos + glow engine</li>
+<li>5 sprites enemigos procedurales</li>
+<li>Jefe con armadura + nucleo</li>
+<li>Particulas de explosion</li>
+<li>Propulsores con trail</li>
+<li>Starfield parallax multicapa</li>
+</ul>
+</div>
+</div>
+<p style="margin-top:25px">Esto demuestra dominio de <span class="hi">matematicas</span>, <span class="hi">sintesis de senal</span>, <span class="hi">graficos por computadora</span> y <span class="hi">teoria de juegos</span> — todo desde codigo puro.</p>
+<div class="footer">Chrono Defender — Hackathon IA Masivo AWS 2026</div>
 </div>
 
-<!-- SLIDE 8: PUBLICACIÓN Y TESTING -->
+<!-- SLIDE 8: MECANICAS DIVERTIDAS -->
 <div class="slide">
-  <h2>Publicado y Verificado</h2>
-  <div class="stat-row">
-    <div class="stat"><div class="stat-number">64</div><div class="stat-label">Tests Unitarios</div></div>
-    <div class="stat"><div class="stat-number">26</div><div class="stat-label">Tests E2E</div></div>
-    <div class="stat"><div class="stat-number">0</div><div class="stat-label">Vulnerabilidades</div></div>
-    <div class="stat"><div class="stat-number">∞</div><div class="stat-label">Rejugabilidad</div></div>
-  </div>
-  <ul style="margin-top:40px;">
-    <li><span class="highlight">Despliegue:</span> GitHub Pages — automático en cada push via GitHub Actions</li>
-    <li><span class="highlight">CI Pipeline:</span> typecheck → lint → format → unit tests → build → e2e → audit</li>
-    <li><span class="highlight">Persistencia:</span> localStorage — high scores, logros, opciones, estadísticas</li>
-    <li><span class="highlight">Seguridad:</span> Dependencias pinneadas, 0 vulnerabilidades, sin secretos</li>
-    <li><span class="highlight">Accesibilidad:</span> Reducción de destellos, alto contraste, silencio con M, soporte multi-input</li>
-  </ul>
-  <p style="margin-top:30px;">Cualquier persona puede jugarlo <span class="accent">ahora mismo</span> desde cualquier navegador moderno.</p>
-  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
+<h2>Mecanicas Simples, Diversion Real</h2>
+<p style="margin-bottom:25px">El tip del hackathon: "Apuesta por mecanicas simples pero divertidas"</p>
+<div class="grid-3">
+<div class="box"><h3>Dispara</h3><p style="font-size:.9em;text-align:left;color:#aaa">6 armas distintas. Cambio instantaneo. Cada una con sensacion unica.</p></div>
+<div class="box"><h3>Esquiva</h3><p style="font-size:.9em;text-align:left;color:#aaa">5 patrones enemigos. Proyectiles. Oleadas crecientes. Jefes.</p></div>
+<div class="box"><h3>Progresa</h3><p style="font-size:.9em;text-align:left;color:#aaa">Combos x4. Mejoras. Power-ups. 20 logros por desbloquear.</p></div>
+</div>
+<ul style="margin-top:35px">
+<li><span class="acc">Loop adictivo:</span> Dispara → Encadena combos → Sube multiplicador → Colecta mejoras → Sobrevive mas</li>
+<li><span class="acc">Rejugabilidad:</span> Dificultad adaptativa + 20 logros + leaderboard = motivacion para volver</li>
+<li><span class="acc">Accesible:</span> Se aprende en 10 segundos, se domina en horas</li>
+<li><span class="acc">Satisfactorio:</span> Sacudida de camara, flash de dano, explosiones, sonido de combo</li>
+<li><span class="acc">Game feel:</span> Cada accion tiene feedback visual Y sonoro inmediato</li>
+</ul>
+<div class="footer">Chrono Defender — Hackathon IA Masivo AWS 2026</div>
 </div>
 
-<!-- SLIDE 9: POR QUÉ DEBERÍA GANAR -->
+<!-- SLIDE 9: TESTING Y DESPLIEGUE -->
 <div class="slide">
-  <h2>¿Por Qué Chrono Defender Debería Ganar?</h2>
-  <div class="grid">
-    <div class="grid-item">
-      <h3>Cumple Todo lo Pedido</h3>
-      <ul>
-        <li>Ciclo completo de juego ✓</li>
-        <li>Lógica + controles + físicas ✓</li>
-        <li>Detección de colisiones ✓</li>
-        <li>Sistema de puntaje ✓</li>
-        <li>Estados inicio/juego/fin ✓</li>
-        <li>Publicado y jugable ✓</li>
-      </ul>
-    </div>
-    <div class="grid-item">
-      <h3>Va Más Allá</h3>
-      <ul>
-        <li>20 logros con persistencia</li>
-        <li>Leaderboard top 10</li>
-        <li>Soporte gamepad + móvil</li>
-        <li>Pantalla de opciones completa</li>
-        <li>90 tests automatizados</li>
-        <li>Audio y arte procedural</li>
-      </ul>
-    </div>
-    <div class="grid-item">
-      <h3>Demuestra Kiro</h3>
-      <ul>
-        <li>Idea → Producto completo</li>
-        <li>Arquitectura profesional</li>
-        <li>13 sistemas modulares</li>
-        <li>Testing exhaustivo</li>
-        <li>CI/CD funcional</li>
-        <li>Documentación bilingüe</li>
-      </ul>
-    </div>
-    <div class="grid-item">
-      <h3>Creatividad</h3>
-      <ul>
-        <li>Cero assets = pura ingeniería</li>
-        <li>Síntesis de audio original</li>
-        <li>Mecánicas adictivas</li>
-        <li>Dificultad que se adapta</li>
-        <li>Narrativa sci-fi coherente</li>
-        <li>Experiencia completa y pulida</li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer">Chrono Defender — Hackathon Kiro 2026</div>
+<h2>Software Funcional: Testing y Despliegue</h2>
+<div class="stats">
+<div class="stat"><b>64</b><span>Tests Unitarios</span></div>
+<div class="stat"><b>26</b><span>Tests E2E</span></div>
+<div class="stat"><b>0</b><span>Vulnerabilidades</span></div>
+<div class="stat"><b>0</b><span>Errores Lint</span></div>
+</div>
+<ul style="margin-top:35px">
+<li><span class="hi">Vitest:</span> SaveManager, AchievementManager, GamepadManager, DifficultyManager, ScoreManager, SettingsManager</li>
+<li><span class="hi">Playwright:</span> Navegacion de menu, pausa, quit, mute, gameplay completo, opciones</li>
+<li><span class="hi">CI/CD:</span> typecheck → lint → format → test → build → e2e → audit (automatico en cada push)</li>
+<li><span class="hi">Despliegue:</span> GitHub Pages automatico tras CI exitoso</li>
+<li><span class="hi">Seguridad:</span> Dependencias pinneadas (tilde), npm audit en CI, sin secretos en el repo</li>
+<li><span class="hi">Entregables:</span> Repo publico + README bilingue + Demo online + Video presentacion</li>
+</ul>
+<p style="margin-top:25px">Cualquier persona puede jugarlo <span class="acc">ahora mismo</span> sin instalar nada.</p>
+<div class="footer">Chrono Defender — Hackathon IA Masivo AWS 2026</div>
 </div>
 
-<!-- SLIDE 10: CIERRE -->
+<!-- SLIDE 10: POR QUE DEBERIA GANAR -->
 <div class="slide">
-  <h1>CHRONO DEFENDER</h1>
-  <p class="subtitle">Un videojuego completo. Cero assets externos. Desarrollo asistido por Kiro.</p>
-  <div style="margin-top:30px; text-align:center;">
-    <p><span class="highlight">▶ Jugar Ahora:</span></p>
-    <p class="url">https://robinsonalexanderquiroz-droid.github.io/chrono-defender/</p>
-    <br>
-    <p><span class="highlight">📂 Código Fuente:</span></p>
-    <p class="url">https://github.com/robinsonalexanderquiroz-droid/chrono-defender</p>
-  </div>
-  <div style="margin-top:40px; text-align:center;">
-    <div class="kiro-badge" style="font-size:1.1em;">Construido con Kiro</div>
-  </div>
-  <div style="margin-top:40px; text-align:center;">
-    <p style="color:#ffcc00; font-size:1.4em;">¡Gracias!</p>
-    <p style="color:#888; font-size:0.95em; margin-top:10px;">Robinson Alexander Quiroz</p>
-  </div>
-  <div class="footer">Hackathon Kiro 2026</div>
+<h2>¿Por Que Chrono Defender Deberia Ganar?</h2>
+<div class="grid">
+<div class="box">
+<h3>Game Design (30%)</h3>
+<ul>
+<li>Dificultad desafiante pero lograble</li>
+<li>5 enemigos + 6 armas + jefes</li>
+<li>Combos que recompensan habilidad</li>
+<li>Loop adictivo simple-pero-profundo</li>
+<li>Feedback satisfactorio en cada accion</li>
+</ul>
+</div>
+<div class="box">
+<h3>Innovacion (30%)</h3>
+<ul>
+<li>CERO assets = pura ingenieria</li>
+<li>Audio sintetizado en tiempo real</li>
+<li>3 inputs simultaneos unificados</li>
+<li>Config declarativa sin magic numbers</li>
+<li>Migracion automatica de saves</li>
+</ul>
+</div>
+<div class="box">
+<h3>Software Funcional (30%)</h3>
+<ul>
+<li>Repo + README + Demo + Video ✓</li>
+<li>90 tests automatizados</li>
+<li>CI/CD completo y funcionando</li>
+<li>20 logros + leaderboard</li>
+<li>Pantalla de opciones interactiva</li>
+</ul>
+</div>
+<div class="box">
+<h3>Kiro + AWS (10%)</h3>
+<ul>
+<li>Desarrollado 100% con Kiro IDE</li>
+<li>Steering docs guian consistencia</li>
+<li>IA genero arquitectura modular</li>
+<li>Tests creados con asistencia Kiro</li>
+<li>GitHub Pages para despliegue</li>
+</ul>
+</div>
+</div>
+<div class="footer">Chrono Defender — Hackathon IA Masivo AWS 2026</div>
+</div>
+
+<!-- SLIDE 11: CIERRE -->
+<div class="slide">
+<h1>CHRONO DEFENDER</h1>
+<p class="sub">Un videojuego completo, original y jugable — de la idea al producto con Kiro</p>
+<div style="margin-top:25px;text-align:center">
+<p><span class="hi">▶ Jugar Ahora:</span></p>
+<p class="url">https://robinsonalexanderquiroz-droid.github.io/chrono-defender/</p>
+<br>
+<p><span class="hi">📂 Codigo Fuente:</span></p>
+<p class="url">https://github.com/robinsonalexanderquiroz-droid/chrono-defender</p>
+</div>
+<div style="margin-top:30px;text-align:center">
+<span class="badge">Kiro IDE</span>
+<span class="badge-aws">GitHub Pages</span>
+<span class="tag">TypeScript</span>
+<span class="tag">Phaser 3</span>
+<span class="tag">Web Audio</span>
+<span class="tag">Vitest</span>
+<span class="tag">Playwright</span>
+</div>
+<div style="margin-top:40px;text-align:center">
+<p style="color:#ffcc00;font-size:1.4em">¡Gracias!</p>
+<p style="color:#888;font-size:.95em;margin-top:10px">Robinson Alexander Quiroz</p>
+<p style="color:#666;font-size:.85em;margin-top:5px">Hackathon IA Masivo Online AWS — Codigo Facilito — Julio 2026</p>
+</div>
+<div class="footer">Hackathon IA Masivo AWS x Codigo Facilito 2026</div>
 </div>
 
 </body>
